@@ -23,25 +23,35 @@ class ChatGPT:
             self.messages.append({"role": "system", "content": self.system})
 
     def __call__(self):
+        self._print_connected_message()
+        self._start_chat()
+        self._print_disconnected_message()
+        self._save_chat_history()
+
+    def _print_connected_message(self):
         self.console.print(
             f"{self.character} is connected...",
             highlight=False,
             style="italic dark_green",
         )
 
+    def _start_chat(self):
         user_input = ""
         while self.stop_str != user_input:
             user_input = self.user_act()
             if(self.stop_str != user_input):
                 self.assistant_act()
 
+    def _print_disconnected_message(self):
         self.console.print(
             f"{self.character} has left the chat room.\n{self.token_total:,} total ChatGPT tokens used.",
             highlight=False,
             style="italic",
         )
-        with open(f"history/chat_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as file:                                           
-            file.write('\n\n'.join(self.history)) 
+
+    def _save_chat_history(self):
+        with open(f"history/chat_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as file:
+            file.write('\n\n'.join(self.history))
     
     def user_act(self, user_input=None):
         if not user_input:
