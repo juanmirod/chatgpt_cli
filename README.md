@@ -1,6 +1,12 @@
 # ChatGPT CLI
 
-This is a command line interface that uses OpenAI's GPT API to simulate chat with various personalities. The interface is written in Python and requires an OpenAI API key to function.
+This is a command line interface that uses OpenAI's GPT API to simulate chat with various personalities. The interface is written in Python and requires an OpenAI API key to function. The objective with this tool is to have an easy and fast communication way with ChatGPT (no need for browser, captcha, login, etc) and to have more control on the parameters and the output.
+
+The interface includes a feature that allows the user to finish and save the conversation:
+When the user writes `q` as request, the script finishes the conversation and stores the entire conversation as a
+markdown file in the `history` folder.
+
+It also includes a couple of example system prompts that define a "character" to follow for ChatGPT.
 
 ## Dependencies
 
