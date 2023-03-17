@@ -46,6 +46,13 @@ There are several sample personalities provided in the repo, which can be run si
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+Possible new features that would be interesting:
+
+- [] Load a history file to continue a conversation
+- [] Copy and paste code in the request (broken because of new lines)
+- [] Publish a conversation as a gist or somewhere else
+- [] More Characters
+
 ## License
 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
