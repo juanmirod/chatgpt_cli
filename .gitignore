@@ -1,0 +1,6 @@
+.env
+*.jsonl
+history/*
+.DS_Store
+local
+__pycache__
