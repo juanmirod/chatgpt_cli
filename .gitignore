@@ -1,6 +1,7 @@
 .env
 *.jsonl
-history/*
+history/*.md
+history/*.html
 .DS_Store
 local
 __pycache__
