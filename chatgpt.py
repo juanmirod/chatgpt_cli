@@ -1,11 +1,34 @@
 import openai
+import wikipedia
+import re
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
+import warnings
 
+action_re = re.compile('^Action: (\w+): (.*)$')
+wikipedia.set_lang("en")
+
+def wikipedia_summary(q):
+    with warnings.catch_warnings():
+      warnings.simplefilter("ignore")
+      try:
+        text = wikipedia.summary(q, sentences=5)
+      except wikipedia.exceptions.DisambiguationError as e:
+        # if there are several pages for that string, pick the first suggestion
+        text = wikipedia.summary(e.options[0], sentences=5)
+    return text
+
+def calculate(exp):
+    return eval(exp)
+
+known_actions = {
+    "wikipedia": wikipedia_summary,
+    "calculate": calculate,
+}
 @dataclass
 class ChatGPT:
     system: str = None
@@ -41,6 +64,41 @@ class ChatGPT:
             user_input = self.user_act()
             if(self.stop_str != user_input):
                 self.assistant_act()
+    
+    def start_chat_with_actions(self):
+        self._print_connected_message()
+        self._chat_with_actions_loop()
+        self._print_disconnected_message()
+        self._save_chat_history()
+        
+    def _chat_with_actions_loop(self):
+        user_input = ""
+        while self.stop_str != user_input:
+            user_input = self.user_act()
+            if(self.stop_str != user_input):
+                assistant_response = self.assistant_act()
+                actions = [action_re.match(a) for a in assistant_response.split('\n') if action_re.match(a)]
+                while actions:
+                    action, action_input = actions[0].groups()
+                    if action not in known_actions:
+                        raise Exception("Unknown action: {}: {}".format(action, action_input))
+                    self.console.print(
+                        f"--running {action} {action_input}",
+                        highlight=False,
+                        style="italic dark_green",
+                    )
+                    observation = known_actions[action](action_input)
+                    next_prompt = f"--Observation: {observation}"
+                    self.console.print(
+                        next_prompt,
+                        highlight=False,
+                        style="italic dark_green",
+                    )
+                    self.messages.append({"role": "user", "content": next_prompt})
+                    assistant_response = self.assistant_act()
+                    actions = [action_re.match(a) for a in assistant_response.split('\n') if action_re.match(a)]
+            else:
+                return
 
     def _print_disconnected_message(self):
         self.console.print(
