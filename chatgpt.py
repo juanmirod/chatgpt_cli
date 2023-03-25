@@ -7,6 +7,7 @@ from rich.prompt import Prompt
 from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
+from tts import say
 import warnings
 
 action_re = re.compile('^Action: (\w+): (.*)$')
@@ -35,6 +36,7 @@ class ChatGPT:
     character: str = ""
     history = []
     stop_str: str = "q"
+    tts: bool = False
     messages: List[dict] = field(default_factory=list)
     token_total: int = 0
     user_start: bool = True
@@ -130,6 +132,8 @@ class ChatGPT:
             sep=""
         )
         self.messages.append({"role": "assistant", "content": result})
+        if self.tts:
+            say(result)
         return result
 
     def execute(self):
