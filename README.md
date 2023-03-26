@@ -3,8 +3,11 @@
 This is a command line interface that uses OpenAI's GPT API to simulate chat with various personalities. The interface is written in Python and requires an OpenAI API key to function. The objective with this tool is to have an easy and fast communication way with ChatGPT (no need for browser, captcha, login, etc) and to have more control on the parameters and the output.
 
 The interface includes a feature that allows the user to finish and save the conversation:
-When the user writes `q` as request, the script finishes the conversation and stores the entire conversation as a
-markdown file in the `history` folder.
+When the user writes `q` as request, the script finishes the conversation and stores the entire conversation as a markdown file in the `history` folder.
+
+The chat now allow multiline entries for the user (needed when you copy and paste some code) do to send
+the request the user needs to finish with a `*` as termination character. The termination character can
+be configured when instantiating the ChatGPT class, if `None` is passed the user request will be send on return. 
 
 It also includes a couple of example system prompts that define a "character" to follow for ChatGPT.
 
@@ -51,7 +54,7 @@ Possible new features that would be interesting:
 - [x] Implement ReAct pattern for fact checking and arithmetic
 - [] add more actions
 - [] Load a history file to continue a conversation
-- [] Copy and paste code in the request (broken because of new lines)
+- [x] Copy and paste code in the request (broken because of new lines)
 - [] Publish a conversation as a gist or somewhere else
 
 ## License
