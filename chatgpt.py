@@ -57,13 +57,6 @@ class ChatGPT:
         self._print_disconnected_message()
         self._save_chat_history()
 
-    def _print_connected_message(self):
-        self.console.print(
-            f"{self.character} is connected...",
-            highlight=False,
-            style="italic dark_green",
-        )
-
     def _start_chat(self):
         user_input = ""
         while self.stop_str != user_input:
@@ -121,15 +114,24 @@ class ChatGPT:
             else:                                                                  
                 return
 
-    def _print_disconnected_message(self):
-        self.console.print(
-            f"{self.character} has left the chat room.\n{self.token_total:,} total ChatGPT tokens used.",
-            highlight=False,
-            style="italic",
-        )
+    def _print_system_message(self, msg):
+        self.console.print(msg, highlight=False, style="italic dark_green")
 
+    def _print_connected_message(self):
+        self._print_system_message(f"{self.character} is connected...")
+
+    def _print_disconnected_message(self):
+        self._print_system_message(f"{self.character} has left the chat room.\n{self.token_total:,} total ChatGPT tokens used.")
+
+    def _get_conversation_summary(self):
+        self._print_system_message(f"Getting conversation summary...")
+        self.messages.append({"role": "user", "content": 'Make a summary of the conversation in a short sentence, 5 words maximum.'})
+        result = self.execute()
+        return re.sub(r'[^\w]', '_', result)
+    
     def _save_chat_history(self):
-        with open(f"history/chat_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as file:
+        summary = self._get_conversation_summary()
+        with open(f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as file:
             file.write('\n\n'.join(self.history))
     
     def user_act(self, user_input=None):
@@ -138,12 +140,14 @@ class ChatGPT:
             while self.termination_re and not self.termination_re.match(user_input):
                 new_line = input()
                 user_input = user_input + new_line
-            user_input = user_input[:-1] # remove the termination character
+            if self.termination_re:
+                user_input = user_input[:-1] # remove the termination character
         self.messages.append({"role": "user", "content": user_input})
         self.history.append(f"**You:** _{user_input}_")
         return user_input
 
     def assistant_act(self):
+        self._print_system_message(f"Sending request...")
         result = self.execute()
         self.history.append(f"**{self.character}:**" if self.character else "")
         self.history.append(result)

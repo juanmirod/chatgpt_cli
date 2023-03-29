@@ -45,6 +45,8 @@ There are several sample personalities provided in the repo, which can be run si
 
 ```python3 pythonExpert.py```
 
+To create a new character, copy the `psycologist.py` file and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
