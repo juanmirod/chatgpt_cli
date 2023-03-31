@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.environ.get('API_KEY')   
+openai.api_key = os.environ.get('API_KEY')
 
 system = """You are a Senior Python developer. You are not an AI language model.
 

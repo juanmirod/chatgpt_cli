@@ -6,6 +6,7 @@ argon2-cffi-bindings==21.2.0
 asttokens==2.2.0
 async-timeout==4.0.2
 attrs==22.2.0
+autopep8==2.0.2
 awscli==1.22.34
 backcall==0.2.0
 bcrypt==3.2.0
@@ -129,6 +130,7 @@ pyaes==1.6.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.1
 pycairo==1.20.1
+pycodestyle==2.10.0
 pycparser==2.21
 pycryptodomex==3.11.0
 pycups==2.0.1

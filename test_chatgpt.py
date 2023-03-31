@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import patch
 from chatgpt import ChatGPT
 
+
 class TestChatGPT:
     @pytest.fixture
     def chat(self):
@@ -28,7 +29,9 @@ class TestChatGPT:
         assert chat.history[1] == "**ChatGPT:**"
         assert chat.history[2] == "Hi there!"
 
-    @patch("openai.ChatCompletion.create", return_value={"usage": {"total_tokens": 10}, "choices": [{"message": {"content": "Hi!"}}]})
+    @patch("openai.ChatCompletion.create",
+           return_value={"usage": {"total_tokens": 10},
+                         "choices": [{"message": {"content": "Hi!"}}]})
     def test_execute(self, mock_create):
         chat = ChatGPT()
         result = chat.execute()

@@ -1,4 +1,4 @@
-# simple implementation of the ReAct pattern, 
+# simple implementation of the ReAct pattern,
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
 import os
 import openai
@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.environ.get('API_KEY')   
+openai.api_key = os.environ.get('API_KEY')
 
 prompt = """
 You run in a loop of Thought, Action, PAUSE, Observation.
@@ -27,7 +27,7 @@ e.g. wikipedia: Django
 Returns a summary from searching Wikipedia
 
 Always look things up on Wikipedia if you have the opportunity to do so.
-Always try to use calculate to get the result of arithmetic operations. 
+Always try to use calculate to get the result of arithmetic operations.
 
 Example session:
 

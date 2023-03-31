@@ -53,11 +53,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Possible new features that would be interesting:
 
-- [x] Implement ReAct pattern for fact checking and arithmetic
-- [] add more actions
+- [] Add more actions
 - [] Load a history file to continue a conversation
-- [x] Copy and paste code in the request (broken because of new lines)
 - [] Publish a conversation as a gist or somewhere else
+- [x] Implement ReAct pattern for fact checking and arithmetic
+- [x] Copy and paste code in the request (broken because of new lines)
+- [x] add more characters
 
 ## License
 
