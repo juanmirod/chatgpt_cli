@@ -166,7 +166,10 @@ class ChatGPT:
 
     def assistant_act(self):
         self._print_system_message(f"Sending request...")
-        result = self.execute()
+        try:
+            result = self.execute()
+        except Exception as e:
+            result = str(e)
         self.history.append(f"**{self.character}:**" if self.character else "")
         self.history.append(result)
         self.console.print(
