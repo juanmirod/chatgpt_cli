@@ -3,5 +3,6 @@
 history/*.md
 history/*.html
 .DS_Store
+.vscode
 local
 __pycache__
