@@ -136,18 +136,22 @@ class ChatGPT:
             f"{self.character} has left the chat room.\n{self.token_total:,} total ChatGPT tokens used."
         )
 
-    def _get_conversation_summary(self):
+    def _get_conversation_title(self):
         self._print_system_message(f"Getting conversation summary...")
         self.messages.append({
             "role": "user",
             "content": 'Make a summary of the conversation in a short sentence, 5 words maximum.'
         })
-        result = self.execute()
+        try:
+            result = self.execute()
+        except Exception as e:
+            result = 'No summary'
         return re.sub(r'[^\w]', '_', result)
 
     def _save_chat_history(self):
-        summary = self._get_conversation_summary()
-        with open(f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w") as file:
+        summary = self._get_conversation_title()
+        path = path
+        with open(path, "w") as file:
             file.write('\n\n'.join(self.history))
 
     def user_act(self, user_input=None):

@@ -47,18 +47,25 @@ There are several sample personalities provided in the repo, which can be run si
 
 To create a new character, copy the `psycologist.py` file and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
 
+## Features
+
+- [x] Save the conversation
+- [x] Ask for a summary in a few words to name the file of the saved conversation
+- [x] Error handling: the bot answers with the error message 
+- [x] Implement ReAct pattern for fact checking and arithmetic
+- [x] Copy and paste code in the request: It waits for a termination character so you can write several lines as part of your volley.
+
+## Possible next features, cool things that I would like...
+
+- [] Add more actions
+- [] Load a history file to continue a conversation
+- [] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
+- [] Publish a conversation as a gist or somewhere else
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Possible new features that would be interesting:
-
-- [] Add more actions
-- [] Load a history file to continue a conversation
-- [] Publish a conversation as a gist or somewhere else
-- [x] Implement ReAct pattern for fact checking and arithmetic
-- [x] Copy and paste code in the request (broken because of new lines)
-- [x] add more characters
 
 ## License
 
