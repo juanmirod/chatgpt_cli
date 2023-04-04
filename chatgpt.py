@@ -39,8 +39,7 @@ known_actions = {
 @dataclass
 class ChatGPT:
     system: str = None
-    character: str = ""
-    history: List[dict] = field(default_factory=list)
+    character: str = "ChatGPT"
     stop_str: str = "q"
     tts: bool = False
     messages: List[dict] = field(default_factory=list)
@@ -155,7 +154,16 @@ class ChatGPT:
         summary = self._get_conversation_title()
         path = f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
         with open(path, "w") as file:
-            file.write('\n\n'.join(self.history))
+            file.write(self._messages_to_text())
+
+    def _messages_to_text(self):
+        messages = filter(lambda msg: msg['role'] != 'system', self.messages)
+        return '\n\n'.join(map(lambda msg: f"**{self._get_role_name(msg['role'])}:** {msg['content']}", messages))
+
+    def _get_role_name(self, role):
+        if role == 'user':
+            return 'You'
+        return self.character
 
     def user_act(self, user_input=None):
         if not user_input:
@@ -168,7 +176,6 @@ class ChatGPT:
                     # remove the termination character
                     user_input = user_input[:-1]
                 self.messages.append({"role": "user", "content": user_input})
-                self.history.append(f"**You:** _{user_input}_")
             except (KeyboardInterrupt, EOFError):
                 self._print_system_message('\nUser interrupted the conversation.')
                 user_input = self.stop_str
@@ -180,8 +187,6 @@ class ChatGPT:
             result = self.execute()
         except Exception as e:
             result = str(e)
-        self.history.append(f"**{self.character}:**" if self.character else "")
-        self.history.append(result)
         self.console.print(
             f"{self.character}:" if self.character else "",
             Markdown(result),
