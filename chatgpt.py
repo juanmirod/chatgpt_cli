@@ -40,7 +40,7 @@ known_actions = {
 class ChatGPT:
     system: str = None
     character: str = ""
-    history = []
+    history: List[dict] = field(default_factory=list)
     stop_str: str = "q"
     tts: bool = False
     messages: List[dict] = field(default_factory=list)
@@ -48,6 +48,7 @@ class ChatGPT:
     user_start: bool = True
     temperature: float = 1.0
     termination_character: str = '*'
+    # conversation: str =None
 
     def __post_init__(self):
         self.termination_re = None
@@ -59,6 +60,8 @@ class ChatGPT:
             self.messages.append({"role": "system", "content": self.system})
 
     def __call__(self):
+        # if self.conversation:
+        #     self.messages = load_conversation(self.conversation)
         self._print_connected_message()
         self._start_chat()
         self._print_disconnected_message()
@@ -140,7 +143,7 @@ class ChatGPT:
         self._print_system_message(f"Getting conversation summary...")
         self.messages.append({
             "role": "user",
-            "content": 'Make a summary of the conversation in a short sentence, 5 words maximum.'
+            "content": 'Make a summary of the conversation in 5 words or less.'
         })
         try:
             result = self.execute()
@@ -150,22 +153,25 @@ class ChatGPT:
 
     def _save_chat_history(self):
         summary = self._get_conversation_title()
-        path = path
+        path = f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
         with open(path, "w") as file:
             file.write('\n\n'.join(self.history))
 
     def user_act(self, user_input=None):
         if not user_input:
-            user_input = Prompt.ask("You")
-            while self.termination_re and not self.termination_re.match(
-                    user_input):
-                new_line = input()
-                user_input = user_input + new_line
-            if self.termination_re:
-                # remove the termination character
-                user_input = user_input[:-1]
-        self.messages.append({"role": "user", "content": user_input})
-        self.history.append(f"**You:** _{user_input}_")
+            try:
+                user_input = Prompt.ask("You")
+                while self.termination_re and not self.termination_re.match(user_input):
+                    new_line = input()
+                    user_input = user_input + new_line
+                if self.termination_re:
+                    # remove the termination character
+                    user_input = user_input[:-1]
+                self.messages.append({"role": "user", "content": user_input})
+                self.history.append(f"**You:** _{user_input}_")
+            except (KeyboardInterrupt, EOFError):
+                self._print_system_message('\nUser interrupted the conversation.')
+                user_input = self.stop_str
         return user_input
 
     def assistant_act(self):
