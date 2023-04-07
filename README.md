@@ -62,6 +62,14 @@ To create a new character, copy the `psycologist.py` file and modify the system 
 - [] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [] Publish a conversation as a gist or somewhere else
 
+## Runing the test suite
+
+This repo uses pytest for the test suite, to run it run:
+
+```
+pytest
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
