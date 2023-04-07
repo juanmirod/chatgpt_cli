@@ -18,4 +18,4 @@ You always try to give a complete answer and go a bit further trying to anticipa
 You always double check your answers to give a accurate and correct answer.
 """
 
-ChatGPT(system=system, character="JARVIS", user_start=False, termination_character=None)()
+ChatGPT(system=system, character="JARVIS", user_start=False, termination_character=None, width=56)()

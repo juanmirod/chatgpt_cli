@@ -46,6 +46,7 @@ class ChatGPT:
     token_total: int = 0
     user_start: bool = True
     temperature: float = 1.0
+    width: int = 80
     termination_character: str = '*'
     # conversation: str =None
 
@@ -54,7 +55,7 @@ class ChatGPT:
         if self.termination_character:
             self.termination_re = re.compile(
                 f'.*\\{self.termination_character}$')
-        self.console = Console(width=80, record=True)
+        self.console = Console(width=self.width, record=True)
         if self.system:
             self.messages.append({"role": "system", "content": self.system})
 
