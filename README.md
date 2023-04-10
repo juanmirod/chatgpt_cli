@@ -11,10 +11,21 @@ be configured when instantiating the ChatGPT class, if `None` is passed the user
 
 It also includes a couple of example system prompts that define a "character" to follow for ChatGPT.
 
-## Dependencies
+## Run it with docker
 
-All dependencies are listed in the `requirements.txt` file. To install dependencies, it's recommended to use a virtual environment such as venv.
+If you have docker in your machine and just want to run the default personality (JARVIS, a helpful AI assistant created by Tony Stark) you can run:
 
+```
+
+# build the container
+docker build -t jarvis .
+
+# Run the container as a command line app
+docker run --rm -it myapp
+
+```
+
+## Run without docker, using virtual environment
 ### Setting up a Virtual Environment
 
 To create a virtual environment for the project, run the following command:
@@ -43,7 +54,7 @@ To start the chat, run the following command:
 
 There are several sample personalities provided in the repo, which can be run simply by specifying the name of the file:
 
-```python3 pythonExpert.py```
+```python3 psycologist.py```
 
 To create a new character, copy the `psycologist.py` file and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
 
@@ -54,13 +65,17 @@ To create a new character, copy the `psycologist.py` file and modify the system 
 - [x] Error handling: the bot answers with the error message 
 - [x] Implement ReAct pattern for fact checking and arithmetic
 - [x] Copy and paste code in the request: It waits for a termination character so you can write several lines as part of your volley.
+- [x] Works on Termux! \o/
+- [x] Dockerfile to run the app from a docker container 
 
 ## Possible next features, cool things that I would like...
 
-- [] Add more actions
-- [] Load a history file to continue a conversation
-- [] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
-- [] Publish a conversation as a gist or somewhere else
+- [ ] Add more actions
+- [ ] Load a history file to continue a conversation
+- [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
+- [ ] Publish a conversation as a gist or somewhere else
+- [ ] Long term memory with a vector database
+- [ ] Add an action to generate images with the help of ChatGPT using Dall-e API
 
 ## Runing the test suite
 
