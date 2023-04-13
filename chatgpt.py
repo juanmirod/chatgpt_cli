@@ -8,11 +8,11 @@ from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
 from tts import say
+from datetime import datetime
 import warnings
 
-action_re = re.compile('^Action: (\\w+): (.*)$')
+action_re = re.compile('^ACTION: (\\w+): (.*)$')
 wikipedia.set_lang("en")
-
 
 def wikipedia_summary(q):
     with warnings.catch_warnings():
@@ -29,12 +29,14 @@ def wikipedia_summary(q):
 def calculate(exp):
     return eval(exp)
 
+def date(when):
+    return f'today is {datetime.today()}'
 
 known_actions = {
     "wikipedia": wikipedia_summary,
     "calculate": calculate,
+    "date": date,
 }
-
 
 @dataclass
 class ChatGPT:
@@ -76,7 +78,7 @@ class ChatGPT:
 
     def start_chat_with_actions(self):
         self._print_connected_message()
-        self._chat_with_actions_loop()
+        self._chat_with_actions()
         self._print_disconnected_message()
         self._save_chat_history()
 
@@ -101,7 +103,7 @@ class ChatGPT:
             style="italic dark_green",
         )
         observation = known_actions[action](action_input)
-        next_prompt = f"--Observation: {observation}"
+        next_prompt = f"OBSERVATION: {observation}"
         self.console.print(
             next_prompt,
             highlight=False,

@@ -50,11 +50,11 @@ Before running the chat, you need to set the `API_KEY` environment variable to y
 
 To start the chat, run the following command:
 
-```python3 start.py```
+```python3 characters/start.py```
 
 There are several sample personalities provided in the repo, which can be run simply by specifying the name of the file:
 
-```python3 psycologist.py```
+```python3 characters/psycologist.py```
 
 To create a new character, copy the `psycologist.py` file and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
 

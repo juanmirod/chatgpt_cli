@@ -2,6 +2,9 @@
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
 import os
 import openai
+import sys
+from dotenv import load_dotenv
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from chatgpt import ChatGPT
 from dotenv import load_dotenv
 
