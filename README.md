@@ -66,8 +66,9 @@ To create a new character, copy the `psycologist.py` file and modify the system 
 - [x] Implement ReAct pattern for fact checking and arithmetic
 - [x] Copy and paste code in the request: It waits for a termination character so you can write several lines as part of your volley.
 - [x] Works on Termux! \o/
-- [x] Dockerfile to run the app from a docker container 
-
+- [x] Dockerfile to run the app from a docker container
+- [x] Autosave
+  
 ## Possible next features, cool things that I would like...
 
 - [ ] Add more actions

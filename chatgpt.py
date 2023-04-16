@@ -75,6 +75,7 @@ class ChatGPT:
             user_input = self.user_act()
             if (self.stop_str != user_input):
                 self.assistant_act()
+                self._autosave()
 
     def start_chat_with_actions(self):
         self._print_connected_message()
@@ -127,6 +128,7 @@ class ChatGPT:
                     self._run_action(action, action_input)
                     assistant_response = self.assistant_act()
                     actions = self._find_actions(assistant_response)
+                self._autosave()
             else:
                 return
 
@@ -152,6 +154,16 @@ class ChatGPT:
         except Exception as e:
             result = 'No summary'
         return re.sub(r'[^\w]', '_', result)
+
+    def _autosave(self):
+        """
+        Save the conversation always to the same file, this is intended to be used as failsafe
+        or as a way to copy code from the conversation file instead of directly from the 
+        command line that has more formatting.
+        """
+        path = f"history/current.md"
+        with open(path, "w") as file:
+            file.write(self._messages_to_text())
 
     def _save_chat_history(self):
         summary = self._get_conversation_title()
@@ -185,7 +197,7 @@ class ChatGPT:
         return user_input
 
     def assistant_act(self):
-        self._print_system_message(f"Sending request...")
+        self._print_system_message(f"waiting for response...")
         try:
             result = self.execute()
         except Exception as e:
