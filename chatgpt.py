@@ -10,6 +10,8 @@ from tts import say
 from actions import known_actions
 
 action_re = re.compile('^ACTION: (\\w+): (.*)$')
+SYSTEM_TEXT_STYLE = "italic yellow"
+ASSISTANT_TEXT_STYLE = "green1"
 
 @dataclass
 class ChatGPT:
@@ -71,18 +73,9 @@ class ChatGPT:
             raise Exception(
                 "Unknown action: {}: {}".format(
                     action, action_input))
-        self.console.print(
-            f"--running {action} {action_input}",
-            highlight=False,
-            style="italic dark_green",
-        )
+        self._print_system_message(f"--running {action} {action_input}")
         observation = known_actions[action](action_input)
-        next_prompt = f"OBSERVATION: {observation}"
-        self.console.print(
-            next_prompt,
-            highlight=False,
-            style="italic dark_green",
-        )
+        self._print_system_message(f"OBSERVATION: {observation}")
         self.messages.append({"role": "user", "content": next_prompt})
 
     def _chat_with_actions(self):
@@ -106,7 +99,7 @@ class ChatGPT:
                 return
 
     def _print_system_message(self, msg):
-        self.console.print(msg, highlight=False, style="italic dark_green")
+        self.console.print(msg, highlight=False, style=SYSTEM_TEXT_STYLE)
 
     def _print_connected_message(self):
         self._print_system_message(f"{self.character} is connected...")
@@ -179,7 +172,7 @@ class ChatGPT:
             f"{self.character}:" if self.character else "",
             Markdown(result),
             highlight=False,
-            style="bright_green",
+            style=ASSISTANT_TEXT_STYLE,
             sep=""
         )
         self.messages.append({"role": "assistant", "content": result})
