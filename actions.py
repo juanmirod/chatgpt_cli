@@ -1,6 +1,7 @@
 import wikipedia
 import warnings
 from datetime import datetime
+from imagine import imagine
 
 wikipedia.set_lang("en")
 
@@ -26,4 +27,5 @@ known_actions = {
     "wikipedia": wikipedia_summary,
     "calculate": calculate,
     "date": date,
+    "imagine": imagine,
 }

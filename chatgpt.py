@@ -75,7 +75,8 @@ class ChatGPT:
                     action, action_input))
         self._print_system_message(f"--running {action} {action_input}")
         observation = known_actions[action](action_input)
-        self._print_system_message(f"OBSERVATION: {observation}")
+        next_prompt = f"OBSERVATION: {observation}"
+        self._print_system_message(next_prompt)
         self.messages.append({"role": "user", "content": next_prompt})
 
     def _chat_with_actions(self):
