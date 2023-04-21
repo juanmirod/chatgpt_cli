@@ -41,11 +41,12 @@ class TestChatGPT:
             chat()
 
             mock_execute.assert_called_once()
-            mocked_file.assert_called_once()
+            assert mocked_file.call_count == 2
 
-            mocked_file.assert_called_once_with(
+            mocked_file.assert_called_with(
                 f"history/Hi_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w"
                 )
-            mocked_file().write.assert_called_once_with(
-                '**You:** Hello!\n\n**ChatGPT:** Greetings!\n\n**You:** q'
-                )
+            mocked_file().write.assert_has_calls([
+                call('**You:** Hello!\n\n**ChatGPT:** Greetings!'),
+                call('**You:** Hello!\n\n**ChatGPT:** Greetings!\n\n**You:** q')
+                ])
