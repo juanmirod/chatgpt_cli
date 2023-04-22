@@ -21,7 +21,7 @@ If you have docker in your machine and just want to run the default personality 
 docker build -t jarvis .
 
 # Run the container as a command line app
-docker run --rm -it myapp
+docker run --rm -it jarvis
 
 ```
 
@@ -30,19 +30,25 @@ docker run --rm -it myapp
 
 To create a virtual environment for the project, run the following command:
 
-```python3 -m venv local```
+```
+python3 -m venv local
+```
 
 This will create a virtual environment called `local` in your project directory.
 
 Next, activate the virtual environment using the command:
 
-```source local/bin/activate```
+```
+source local/bin/activate
+```
 
 This will activate the virtual environment and any packages you install will be installed locally instead of globally.
 
 To install the required dependencies for the project, run:
 
-```pip install -r requirements.txt```
+```
+pip install -r requirements.txt
+```
 
 ### Using the ChatGPT CLI
 
@@ -50,13 +56,17 @@ Before running the chat, you need to set the `API_KEY` environment variable to y
 
 To start the chat, run the following command:
 
-```python3 characters/start.py```
+```
+python3 characters/start.py
+```
 
 There are several sample personalities provided in the repo, which can be run simply by specifying the name of the file:
 
-```python3 characters/psycologist.py```
+```
+python3 characters/psycologist.py
+```
 
-To create a new character, copy the `psycologist.py` file and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
+To create a new character, copy any of the characters files and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
 
 ## Features
 
@@ -68,6 +78,7 @@ To create a new character, copy the `psycologist.py` file and modify the system 
 - [x] Works on Termux! \o/
 - [x] Dockerfile to run the app from a docker container
 - [x] Autosave
+- [x] Add an action to generate images with the help of ChatGPT using Dall-e API
   
 ## Possible next features, cool things that I would like...
 
@@ -76,7 +87,6 @@ To create a new character, copy the `psycologist.py` file and modify the system 
 - [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [ ] Publish a conversation as a gist or somewhere else
 - [ ] Long term memory with a vector database
-- [ ] Add an action to generate images with the help of ChatGPT using Dall-e API
 
 ## Runing the test suite
 
