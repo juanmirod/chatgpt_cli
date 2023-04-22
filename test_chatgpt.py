@@ -7,7 +7,11 @@ from datetime import datetime
 class TestChatGPT:
     @pytest.fixture
     def chat(self):
-        return ChatGPT(system="Welcome!", character="ChatGPT", messages=[], termination_character=None)
+        return ChatGPT(
+            system="Welcome!",
+            character="ChatGPT",
+            messages=[],
+            termination_character=None)
 
     @patch("builtins.input", return_value="Hello!")
     def test_user_act(self, mock_input, chat):
@@ -36,7 +40,12 @@ class TestChatGPT:
     @patch("builtins.input", side_effect=["Hello!", "q"])
     @patch.object(ChatGPT, "execute", return_value="Greetings!")
     @patch.object(ChatGPT, "_get_conversation_title", return_value="Hi")
-    def test_full_conversation(self, mock_input, mock_execute, mock_title, chat):
+    def test_full_conversation(
+            self,
+            mock_input,
+            mock_execute,
+            mock_title,
+            chat):
         with patch('builtins.open', mock_open()) as mocked_file:
             chat()
 
@@ -44,8 +53,7 @@ class TestChatGPT:
             assert mocked_file.call_count == 2
 
             mocked_file.assert_called_with(
-                f"history/Hi_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w"
-            )
+                f"history/Hi_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w")
             mocked_file().write.assert_has_calls([
                 call('**You:** Hello!\n\n**ChatGPT:** Greetings!'),
                 call('**You:** Hello!\n\n**ChatGPT:** Greetings!\n\n**You:** q')

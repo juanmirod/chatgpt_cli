@@ -33,7 +33,8 @@ returns the current date and time
 e.g. ACTION: date: today
 
 imagine:
-It allows you to generate an image from a prompt. The observation will be a url, you only have to say to the user that the image is generated.
+It allows you to generate an image from a prompt. The observation will be a url, you only have to say
+to the user that the image is generated.
 e.g. ACTION: imagine: prompt that will be used to generate the image
 
 You should search things in wikipedia for fact checking.

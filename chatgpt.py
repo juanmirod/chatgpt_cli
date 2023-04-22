@@ -82,7 +82,7 @@ class ChatGPT:
 
     def _chat_with_actions(self):
         """
-        Runs a chat loop with actions until the stop string is entered 
+        Runs a chat loop with actions until the stop string is entered
         by the user
         """
         user_input = ""
@@ -126,7 +126,7 @@ class ChatGPT:
     def _autosave(self):
         """
         Save the conversation always to the same file, this is intended to be used as failsafe
-        or as a way to copy code from the conversation file instead of directly from the 
+        or as a way to copy code from the conversation file instead of directly from the
         command line that has more formatting.
         """
         path = f"history/current.md"
@@ -141,7 +141,8 @@ class ChatGPT:
 
     def _messages_to_text(self):
         messages = filter(lambda msg: msg['role'] != 'system', self.messages)
-        return '\n\n'.join(map(lambda msg: f"**{self._get_role_name(msg['role'])}:** {msg['content']}", messages))
+        return '\n\n'.join(map(
+            lambda msg: f"**{self._get_role_name(msg['role'])}:** {msg['content']}", messages))
 
     def _get_role_name(self, role):
         if role == 'user':
@@ -152,7 +153,8 @@ class ChatGPT:
         if not user_input:
             try:
                 user_input = Prompt.ask("You")
-                while self.termination_re and not self.termination_re.match(user_input):
+                while self.termination_re and not self.termination_re.match(
+                        user_input):
                     new_line = input()
                     user_input = user_input + new_line
                 if self.termination_re:
