@@ -5,6 +5,7 @@ from imagine import imagine
 
 wikipedia.set_lang("en")
 
+
 def wikipedia_summary(q):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
@@ -20,8 +21,10 @@ def wikipedia_summary(q):
 def calculate(exp):
     return eval(exp)
 
+
 def date(when):
     return f'today is {datetime.now().replace(second=0, microsecond=0)}'
+
 
 known_actions = {
     "wikipedia": wikipedia_summary,

@@ -13,6 +13,7 @@ action_re = re.compile('^ACTION: (\\w+): (.*)$')
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "green1"
 
+
 @dataclass
 class ChatGPT:
     system: str = None
@@ -159,7 +160,8 @@ class ChatGPT:
                     user_input = user_input[:-1]
                 self.messages.append({"role": "user", "content": user_input})
             except (KeyboardInterrupt, EOFError):
-                self._print_system_message('\nUser interrupted the conversation.')
+                self._print_system_message(
+                    '\nUser interrupted the conversation.')
                 user_input = self.stop_str
         return user_input
 
