@@ -1,9 +1,9 @@
-from chatgpt import ChatGPT
 import os
 import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+from chatgpt import ChatGPT
 import openai
 from dotenv import load_dotenv
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 load_dotenv()
 

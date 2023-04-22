@@ -1,11 +1,11 @@
 # simple implementation of the ReAct pattern,
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
-from chatgpt import ChatGPT
 import os
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+from chatgpt import ChatGPT
 import openai
 import sys
 from dotenv import load_dotenv
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 load_dotenv()
 
