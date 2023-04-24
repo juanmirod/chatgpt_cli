@@ -11,22 +11,31 @@ from actions import known_actions
 
 action_re = re.compile('^ACTION: (\\w+): (.*)$')
 SYSTEM_TEXT_STYLE = "italic yellow"
-ASSISTANT_TEXT_STYLE = "green1"
+ASSISTANT_TEXT_STYLE = "cyan"
 
 
 @dataclass
 class ChatGPT:
+    # The system prompt
     system: str = None
+    # The name of the character
     character: str = "ChatGPT"
+    # the stop string to end the conversation by the user
     stop_str: str = "q"
+    # Whether or not to use text-to-speech
     tts: bool = False
+    # The list of messages in the conversation
     messages: List[dict] = field(default_factory=list)
+    # The total number of tokens used during the conversation
     token_total: int = 0
+    # Whether or not the user starts the conversation
     user_start: bool = True
-    temperature: float = 1.0
-    width: int = 80
+    # The temperature to use during text generation
+    temperature: float = 0.5
+    # The width of the text output
+    width: int = 100
+    # The character used to terminate text generation
     termination_character: str = '*'
-    # conversation: str =None
 
     def __post_init__(self):
         self.termination_re = None
