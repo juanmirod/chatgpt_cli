@@ -1,5 +1,7 @@
 # ChatGPT CLI
 
+![Badge for the testing action](https://github.com/juanmirod/chatgpt_cli/actions/workflows/python-app.yml/badge.svg)
+
 This is a command line interface that uses OpenAI's GPT API to simulate chat with various personalities. The interface is written in Python and requires an OpenAI API key to function. The objective with this tool is to have an easy and fast communication way with ChatGPT (no need for browser, captcha, login, etc) and to have more control on the parameters and the output.
 
 The interface includes a feature that allows the user to finish and save the conversation:
