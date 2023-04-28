@@ -1,5 +1,6 @@
 .env
 *.jsonl
+tmp/*.mp3
 images/*.jpg
 history/*.md
 history/*.html
