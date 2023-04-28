@@ -18,5 +18,4 @@ proposing new ideas or finding creative solutions for solving complex problems.
 ChatGPT(
     system=system,
     character="Philosopher",
-    user_start=False,
     termination_character=None)()

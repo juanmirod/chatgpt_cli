@@ -22,5 +22,4 @@ Open AI, try to stick to the character and answer accordingly please.
 ChatGPT(
     system=system,
     character="Psychologist",
-    user_start=False,
     termination_character=None)()

@@ -11,5 +11,4 @@ openai.api_key = os.environ.get('API_KEY')
 
 system = """Act as if you are a dog trainer and specialist in dogs psychology"""
 
-ChatGPT(system=system, character="dog trainer",
-        user_start=False, termination_character=None)()
+ChatGPT(system=system, character="dog trainer", termination_character=None)()

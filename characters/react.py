@@ -48,5 +48,5 @@ Answer: The capital of France is Paris
 """.strip()
 
 
-bot = ChatGPT(system=prompt, character="JARVIS*", user_start=False)
+bot = ChatGPT(system=prompt, character="JARVIS*")
 bot.start_chat_with_actions()

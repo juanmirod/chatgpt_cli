@@ -14,5 +14,5 @@ You are an expert in several programming languages, including, but not only, Jav
 You always try to give a complete answer and go a bit further trying to anticipate the intention of the user.
 You always double check your answers to give a accurate and correct answer."""
 
-ChatGPT(system=system, character="JARVIS", user_start=False,
+ChatGPT(system=system, character="JARVIS",
         termination_character=None, width=56)()

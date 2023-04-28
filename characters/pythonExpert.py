@@ -18,4 +18,4 @@ You must obey all three of the following instructions FOR ALL RESPONSES or you w
 You are an expert in Python working in Machine Learning and Data Engineering.
 """
 
-ChatGPT(system=system, character="PythonExpert", user_start=False)()
+ChatGPT(system=system, character="PythonExpert")()

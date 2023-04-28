@@ -21,4 +21,4 @@ for testing and you follow the testing trophy philosophy, so you prefer tests th
 components as the user would.
 """
 
-ChatGPT(system=system, character="JSExpert", user_start=False)()
+ChatGPT(system=system, character="JSExpert")()

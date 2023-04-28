@@ -28,8 +28,6 @@ class ChatGPT:
     messages: List[dict] = field(default_factory=list)
     # The total number of tokens used during the conversation
     token_total: int = 0
-    # Whether or not the user starts the conversation
-    user_start: bool = True
     # The temperature to use during text generation
     temperature: float = 0.5
     # The width of the text output

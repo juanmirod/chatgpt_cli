@@ -21,5 +21,4 @@ After that the user will talk with you instead of me.
 ChatGPT(
     system=system,
     character="Narrator",
-    user_start=False,
     termination_character=None)()

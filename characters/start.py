@@ -48,5 +48,5 @@ user: OBSERVATION: France is a country. The capital is Paris.
 you: The capital of France is Paris
 """
 
-bot = ChatGPT(system=system, character="JARVIS*", user_start=False)
+bot = ChatGPT(system=system, character="JARVIS*")
 bot.start_chat_with_actions()
