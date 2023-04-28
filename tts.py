@@ -3,6 +3,7 @@ from time import sleep
 import os
 import pyglet
 
+
 def say(txt):
     tts = gTTS(text=txt, lang='en', tld='co.uk', slow=False)
     filename = 'tmp/temp.mp3'

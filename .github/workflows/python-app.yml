@@ -29,4 +29,5 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
+        pycodestyle --config=.pycodestyle --exclude=local,.git,__pycache__ .
         pytest
