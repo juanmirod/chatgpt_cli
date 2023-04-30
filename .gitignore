@@ -1,9 +1,11 @@
 .env
 *.jsonl
+env*
 tmp/*.mp3
 images/*.jpg
 history/*.md
 history/*.html
+.db
 .DS_Store
 .vscode
 local

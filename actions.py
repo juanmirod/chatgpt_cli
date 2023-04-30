@@ -2,6 +2,7 @@ import wikipedia
 import warnings
 from datetime import datetime
 from imagine import imagine
+from memory import get_related
 
 wikipedia.set_lang("en")
 
@@ -26,9 +27,17 @@ def date(when):
     return f'today is {datetime.now().replace(second=0, microsecond=0)}'
 
 
+def remember(what):
+    related_documents = get_related(what)
+    if related_documents:
+        previous_conversations = '\n---\n'.join(related_documents['documents'][0])
+    return f'Memory:\n{previous_conversations}'
+
+
 known_actions = {
     "wikipedia": wikipedia_summary,
     "calculate": calculate,
     "date": date,
     "imagine": imagine,
+    "retrieve": remember,
 }

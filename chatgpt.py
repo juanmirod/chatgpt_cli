@@ -8,6 +8,7 @@ from typing import List
 from dataclasses import dataclass, field
 from tts import say
 from actions import known_actions
+from memory import save_interchange
 
 action_re = re.compile('^ACTION: (\\w+): (.*)$')
 SYSTEM_TEXT_STYLE = "italic yellow"
@@ -34,6 +35,8 @@ class ChatGPT:
     width: int = 100
     # The character used to terminate text generation
     termination_character: str = '*'
+    # remember the conversation
+    remember: bool = False
 
     def __post_init__(self):
         self.termination_re = None
@@ -57,8 +60,11 @@ class ChatGPT:
         while self.stop_str != user_input:
             user_input = self.user_act()
             if (self.stop_str != user_input):
-                self.assistant_act()
+                response = self.assistant_act()
                 self._autosave()
+                if (self.remember):
+                    self._print_system_message('Storing conversation...')
+                    save_interchange(user_input, response)
 
     def start_chat_with_actions(self):
         self._print_connected_message()
@@ -103,6 +109,9 @@ class ChatGPT:
                     self._run_action(action, action_input)
                     assistant_response = self.assistant_act()
                     actions = self._find_actions(assistant_response)
+                if (self.remember):
+                    self._print_system_message('Storing conversation...')
+                    save_interchange(user_input, assistant_response)
                 self._autosave()
             else:
                 return
