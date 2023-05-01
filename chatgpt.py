@@ -77,8 +77,12 @@ class ChatGPT:
                 assistant_response = self.assistant_act()
                 actions = find_actions(assistant_response)
                 while actions:
-                    action, action_input = actions[0].groups()
-                    run_action(action, action_input)
+                    action, action_input = actions
+                    self._print_system_message(f"--running {action} {action_input}")
+                    observation = run_action(action, action_input)
+                    next_prompt = f"OBSERVATION: {observation}"
+                    self._print_system_message(next_prompt)
+                    self.messages.append({"role": "user", "content": next_prompt})
                     assistant_response = self.assistant_act()
                     actions = find_actions(assistant_response)
                 self._autosave()

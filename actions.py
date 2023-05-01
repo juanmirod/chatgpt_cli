@@ -32,7 +32,8 @@ def find_actions(text):
     """
     Returns a list of known actions found in the given text
     """
-    return [action_re.match(a) for a in text.split('\n') if action_re.match(a)]
+    actions = [action_re.match(a) for a in text.split('\n') if action_re.match(a)]
+    return actions[0].groups() if actions else None
 
 
 def run_action(action, action_input):
@@ -40,14 +41,8 @@ def run_action(action, action_input):
     Runs the given action with the provided input
     """
     if action not in known_actions:
-        raise Exception(
-            "Unknown action: {}: {}".format(
-                action, action_input))
-    self._print_system_message(f"--running {action} {action_input}")
-    observation = known_actions[action](action_input)
-    next_prompt = f"OBSERVATION: {observation}"
-    self._print_system_message(next_prompt)
-    self.messages.append({"role": "user", "content": next_prompt})
+        raise Exception("Unknown action: {}: {}".format(action, action_input))
+    return known_actions[action](action_input)
 
 
 known_actions = {
