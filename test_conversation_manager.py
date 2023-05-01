@@ -17,39 +17,33 @@ class TestConversationManager:
     def test_user_act(self, mock_input, chat):
         user_input = chat.user_act()
         assert user_input == "Hello!"
-        assert len(chat.messages) == 2
-        assert chat.messages[1]["role"] == "user"
-        assert chat.messages[1]["content"] == "Hello!"
+        assert len(chat.messages) == 1
+        assert chat.messages[0]["role"] == "user"
+        assert chat.messages[0]["content"] == "Hello!"
+        mock_input.assert_called_once()
 
-    @patch.object(ConversationManager, "execute", return_value="Hi there!")
-    def test_assistant_act(self, mock_execute, chat):
+    @patch("assistant.chat_completion", return_value=("Hi there!", 100))
+    def test_assistant_act(self, mock_chat_completion, chat):
         result = chat.assistant_act()
+        mock_chat_completion.assert_called_once()
         assert result == "Hi there!"
-        assert len(chat.messages) == 2
-        assert chat.messages[1]["role"] == "assistant"
-        assert chat.messages[1]["content"] == "Hi there!"
-
-    @patch("openai.ChatCompletion.create",
-           return_value={"usage": {"total_tokens": 10},
-                         "choices": [{"message": {"content": "Hi!"}}]})
-    def test_execute(self, mock_create, chat):
-        result = chat.execute()
-        assert result == "Hi!"
-        assert chat.token_total == 10
+        assert len(chat.messages) == 1
+        assert chat.messages[0]["role"] == "assistant"
+        assert chat.messages[0]["content"] == "Hi there!"
 
     @patch("builtins.input", side_effect=["Hello!", "q"])
-    @patch.object(ConversationManager, "execute", return_value="Greetings!")
+    @patch("assistant.chat_completion", return_value=("Greetings!", 100))
     @patch.object(ConversationManager, "_get_conversation_title", return_value="Hi")
     def test_full_conversation(
             self,
             mock_input,
-            mock_execute,
+            mock_chat_completion,
             mock_title,
             chat):
         with patch('builtins.open', mock_open()) as mocked_file:
             chat()
 
-            mock_execute.assert_called_once()
+            mock_chat_completion.assert_called_once()
             assert mocked_file.call_count == 2
 
             mocked_file.assert_called_with(

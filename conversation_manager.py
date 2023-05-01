@@ -8,6 +8,7 @@ from typing import List
 from dataclasses import dataclass, field
 from tts import say
 from actions import find_actions, run_action
+import assistant
 
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "cyan"
@@ -40,8 +41,6 @@ class ConversationManager:
             self.termination_re = re.compile(
                 f'.*\\{self.termination_character}$')
         self.console = Console(width=self.width, record=True)
-        if self.system:
-            self.messages.append({"role": "system", "content": self.system})
 
     def __call__(self):
         # if self.conversation:
@@ -161,26 +160,16 @@ class ConversationManager:
 
     def assistant_act(self):
         self._print_system_message(f"waiting for response...")
-        try:
-            result = self.execute()
-        except Exception as e:
-            result = str(e)
+        result = assistant.chat_completion(self.system, self.messages, self.temperature)
+        self.token_total += result[1]
         self.console.print(
             f"{self.character}:" if self.character else "",
-            Markdown(result),
+            Markdown(result[0]),
             highlight=False,
             style=ASSISTANT_TEXT_STYLE,
             sep=""
         )
-        self.messages.append({"role": "assistant", "content": result})
+        self.messages.append({"role": "assistant", "content": result[0]})
         if self.tts:
-            say(result)
-        return result
-
-    def execute(self):
-        completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=self.messages,
-            temperature=self.temperature)
-        self.token_total += completion["usage"]["total_tokens"]
-        return completion["choices"][0]["message"]["content"]
+            say(result[0])
+        return result[0]
