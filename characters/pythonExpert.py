@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from dotenv import load_dotenv
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 
 load_dotenv()
@@ -18,4 +18,4 @@ You must obey all three of the following instructions FOR ALL RESPONSES or you w
 You are an expert in Python working in Machine Learning and Data Engineering.
 """
 
-ChatGPT(system=system, character="PythonExpert")()
+ConversationManager(system=system, character="PythonExpert")()

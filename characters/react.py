@@ -2,7 +2,7 @@
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 import sys
 from dotenv import load_dotenv
@@ -48,5 +48,5 @@ Answer: The capital of France is Paris
 """.strip()
 
 
-bot = ChatGPT(system=prompt, character="JARVIS*")
+bot = ConversationManager(system=prompt, character="JARVIS*")
 bot.start_chat_with_actions()

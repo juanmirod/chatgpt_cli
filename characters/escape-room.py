@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from dotenv import load_dotenv
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 
 load_dotenv()
@@ -18,7 +18,7 @@ I say to you "START" you can set the scene for the user because that will be the
 After that the user will talk with you instead of me.
 """
 
-ChatGPT(
+ConversationManager(
     system=system,
     character="Narrator",
     termination_character=None)()

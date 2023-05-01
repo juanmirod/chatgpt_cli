@@ -1,4 +1,5 @@
 .env
+.db
 *.jsonl
 tmp/*.mp3
 images/*.jpg

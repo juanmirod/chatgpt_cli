@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 from dotenv import load_dotenv
 
@@ -48,5 +48,5 @@ user: OBSERVATION: France is a country. The capital is Paris.
 you: The capital of France is Paris
 """
 
-bot = ChatGPT(system=system, character="JARVIS*")
+bot = ConversationManager(system=system, character="JARVIS*")
 bot.start_chat_with_actions()

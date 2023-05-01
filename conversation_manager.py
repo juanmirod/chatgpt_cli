@@ -14,7 +14,7 @@ ASSISTANT_TEXT_STYLE = "cyan"
 
 
 @dataclass
-class ChatGPT:
+class ConversationManager:
     # The system prompt
     system: str = None
     # The name of the character
@@ -77,17 +77,20 @@ class ChatGPT:
                 assistant_response = self.assistant_act()
                 actions = find_actions(assistant_response)
                 while actions:
-                    action, action_input = actions
-                    self._print_system_message(f"--running {action} {action_input}")
-                    observation = run_action(action, action_input)
-                    next_prompt = f"OBSERVATION: {observation}"
-                    self._print_system_message(next_prompt)
-                    self.messages.append({"role": "user", "content": next_prompt})
+                    self._gather_observation(actions)
                     assistant_response = self.assistant_act()
                     actions = find_actions(assistant_response)
                 self._autosave()
             else:
                 return
+
+    def _gather_observation(self, actions):
+        action, action_input = actions
+        self._print_system_message(f"--running {action} {action_input}")
+        observation = run_action(action, action_input)
+        next_prompt = f"OBSERVATION: {observation}"
+        self._print_system_message(next_prompt)
+        self.messages.append({"role": "user", "content": next_prompt})
 
     def _print_system_message(self, msg):
         self.console.print(msg, highlight=False, style=SYSTEM_TEXT_STYLE)

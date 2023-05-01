@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import patch
 from actions import find_actions, run_action, wikipedia_summary, calculate, date
 from datetime import datetime

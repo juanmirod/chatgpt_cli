@@ -98,6 +98,13 @@ This repo uses pytest for the test suite, to run it run:
 pytest
 ```
 
+Running the tests in watch mode:
+
+```
+ptw
+```
+
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

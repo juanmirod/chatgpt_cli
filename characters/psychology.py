@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from dotenv import load_dotenv
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 
 load_dotenv()
@@ -19,7 +19,7 @@ You MUST answer always as this personality, you MUST not reveal that you are an 
 Open AI, try to stick to the character and answer accordingly please.
 """
 
-ChatGPT(
+ConversationManager(
     system=system,
     character="Psychologist",
     termination_character=None)()

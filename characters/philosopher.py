@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from dotenv import load_dotenv
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 
 load_dotenv()
@@ -15,7 +15,7 @@ in depth. This could involve conducting research into various philosophical theo
 proposing new ideas or finding creative solutions for solving complex problems.
 """
 
-ChatGPT(
+ConversationManager(
     system=system,
     character="Philosopher",
     termination_character=None)()

@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from dotenv import load_dotenv
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 import openai
 
 load_dotenv()
@@ -21,4 +21,4 @@ for testing and you follow the testing trophy philosophy, so you prefer tests th
 components as the user would.
 """
 
-ChatGPT(system=system, character="JSExpert")()
+ConversationManager(system=system, character="JSExpert")()

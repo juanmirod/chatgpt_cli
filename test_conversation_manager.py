@@ -1,13 +1,13 @@
 import pytest
 from unittest.mock import patch, mock_open, call
-from chatgpt import ChatGPT
+from conversation_manager import ConversationManager
 from datetime import datetime
 
 
-class TestChatGPT:
+class TestConversationManager:
     @pytest.fixture
     def chat(self):
-        return ChatGPT(
+        return ConversationManager(
             system="Welcome!",
             character="ChatGPT",
             messages=[],
@@ -21,7 +21,7 @@ class TestChatGPT:
         assert chat.messages[1]["role"] == "user"
         assert chat.messages[1]["content"] == "Hello!"
 
-    @patch.object(ChatGPT, "execute", return_value="Hi there!")
+    @patch.object(ConversationManager, "execute", return_value="Hi there!")
     def test_assistant_act(self, mock_execute, chat):
         result = chat.assistant_act()
         assert result == "Hi there!"
@@ -38,8 +38,8 @@ class TestChatGPT:
         assert chat.token_total == 10
 
     @patch("builtins.input", side_effect=["Hello!", "q"])
-    @patch.object(ChatGPT, "execute", return_value="Greetings!")
-    @patch.object(ChatGPT, "_get_conversation_title", return_value="Hi")
+    @patch.object(ConversationManager, "execute", return_value="Greetings!")
+    @patch.object(ConversationManager, "_get_conversation_title", return_value="Hi")
     def test_full_conversation(
             self,
             mock_input,
