@@ -7,9 +7,8 @@ from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
 from tts import say
-from actions import known_actions
+from actions import find_actions, run_action
 
-action_re = re.compile('^ACTION: (\\w+): (.*)$')
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "cyan"
 
@@ -66,27 +65,6 @@ class ChatGPT:
         self._print_disconnected_message()
         self._save_chat_history()
 
-    def _find_actions(self, text):
-        """
-        Returns a list of known actions found in the given text
-        """
-        return [action_re.match(a)
-                for a in text.split('\n') if action_re.match(a)]
-
-    def _run_action(self, action, action_input):
-        """
-        Runs the given action with the provided input
-        """
-        if action not in known_actions:
-            raise Exception(
-                "Unknown action: {}: {}".format(
-                    action, action_input))
-        self._print_system_message(f"--running {action} {action_input}")
-        observation = known_actions[action](action_input)
-        next_prompt = f"OBSERVATION: {observation}"
-        self._print_system_message(next_prompt)
-        self.messages.append({"role": "user", "content": next_prompt})
-
     def _chat_with_actions(self):
         """
         Runs a chat loop with actions until the stop string is entered
@@ -97,12 +75,12 @@ class ChatGPT:
             user_input = self.user_act()
             if self.stop_str != user_input:
                 assistant_response = self.assistant_act()
-                actions = self._find_actions(assistant_response)
+                actions = find_actions(assistant_response)
                 while actions:
                     action, action_input = actions[0].groups()
-                    self._run_action(action, action_input)
+                    run_action(action, action_input)
                     assistant_response = self.assistant_act()
-                    actions = self._find_actions(assistant_response)
+                    actions = find_actions(assistant_response)
                 self._autosave()
             else:
                 return
