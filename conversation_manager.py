@@ -1,4 +1,3 @@
-import openai
 import re
 from rich.console import Console
 from rich.markdown import Markdown
@@ -7,7 +6,7 @@ from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
 from tts import say
-from actions import find_actions, run_action
+import actions
 import assistant
 
 SYSTEM_TEXT_STYLE = "italic yellow"
@@ -74,19 +73,19 @@ class ConversationManager:
             user_input = self.user_act()
             if self.stop_str != user_input:
                 assistant_response = self.assistant_act()
-                actions = find_actions(assistant_response)
-                while actions:
-                    self._gather_observation(actions)
+                found_actions = actions.find_actions(assistant_response)
+                while found_actions:
+                    self._gather_observation(found_actions)
                     assistant_response = self.assistant_act()
-                    actions = find_actions(assistant_response)
+                    found_actions = actions.find_actions(assistant_response)
                 self._autosave()
             else:
                 return
 
-    def _gather_observation(self, actions):
-        action, action_input = actions
+    def _gather_observation(self, found_actions):
+        action, action_input = found_actions
         self._print_system_message(f"--running {action} {action_input}")
-        observation = run_action(action, action_input)
+        observation = actions.run_action(action, action_input)
         next_prompt = f"OBSERVATION: {observation}"
         self._print_system_message(next_prompt)
         self.messages.append({"role": "user", "content": next_prompt})
