@@ -141,22 +141,18 @@ class ConversationManager:
             return 'You'
         return self.character
 
-    def user_act(self, user_input=None):
-        if not user_input:
-            try:
-                user_input = Prompt.ask("You")
-                while self.termination_re and not self.termination_re.match(
-                        user_input):
-                    new_line = input()
-                    user_input = user_input + new_line
-                if self.termination_re:
-                    # remove the termination character
-                    user_input = user_input[:-1]
-                self.messages.append({"role": "user", "content": user_input})
-            except (KeyboardInterrupt, EOFError):
-                self._print_system_message(
-                    '\nUser interrupted the conversation.')
-                user_input = self.stop_str
+    def user_act(self):
+        try:
+            user_input = Prompt.ask("You")
+            if self.termination_re:
+                while not self.termination_re.match(user_input):
+                    user_input += input()
+                # remove the termination character
+                user_input = user_input[:-1]
+            self.messages.append({"role": "user", "content": user_input})
+        except (KeyboardInterrupt, EOFError):
+            self._print_system_message('\nUser interrupted the conversation.')
+            user_input = self.stop_str
         return user_input
 
     def assistant_act(self):
