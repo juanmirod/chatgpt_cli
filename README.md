@@ -70,6 +70,12 @@ python3 characters/psycologist.py
 
 To create a new character, copy any of the characters files and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
 
+I also have an alias in my laptop and another one in termux to run the prompt with one simple command:
+
+```
+alias jarvis='cd ~/jarvis && source local/bin/activate; python3 characters/termux.py'
+```
+
 ## Features
 
 - [x] Save the conversation
@@ -82,13 +88,16 @@ To create a new character, copy any of the characters files and modify the syste
 - [x] Autosave
 - [x] Add an action to generate images with the help of ChatGPT using Dall-e API
   
+## I'm working on...
+
+- [ ] Long term memory with a vector database
+
 ## Possible next features, cool things that I would like...
 
-- [ ] Add more actions
 - [ ] Load a history file to continue a conversation
 - [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [ ] Publish a conversation as a gist or somewhere else
-- [ ] Long term memory with a vector database
+- [ ] Multi-agent generation with several specialized agents
 
 ## Runing the test suite
 

@@ -107,10 +107,10 @@ class ConversationManager:
             "role": "user",
             "content": 'Make a summary of the conversation in 5 words or less.'
         })
-        try:
-            result = self.execute()
-        except Exception as e:
-            result = 'No summary'
+        (result, tokens) = assistant.chat_completion(
+            'You are a help full AI assistant.', self.messages, self.temperature
+        )
+        self.token_total += tokens
         return re.sub(r'[^\w]', '_', result)
 
     def _autosave(self):
@@ -159,16 +159,16 @@ class ConversationManager:
 
     def assistant_act(self):
         self._print_system_message(f"waiting for response...")
-        result = assistant.chat_completion(self.system, self.messages, self.temperature)
-        self.token_total += result[1]
+        (result, tokens) = assistant.chat_completion(self.system, self.messages, self.temperature)
+        self.token_total += tokens
         self.console.print(
             f"{self.character}:" if self.character else "",
-            Markdown(result[0]),
+            Markdown(result),
             highlight=False,
             style=ASSISTANT_TEXT_STYLE,
             sep=""
         )
-        self.messages.append({"role": "assistant", "content": result[0]})
+        self.messages.append({"role": "assistant", "content": result})
         if self.tts:
-            say(result[0])
-        return result[0]
+            say(result)
+        return result
