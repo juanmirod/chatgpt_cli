@@ -108,7 +108,9 @@ class ConversationManager:
             "content": 'Make a summary of the conversation in 5 words or less.'
         })
         (result, tokens) = assistant.chat_completion(
-            'You are a help full AI assistant.', self.messages, self.temperature
+            'You are a helpful AI assistant.',
+            self.messages,
+            self.temperature
         )
         self.token_total += tokens
         return re.sub(r'[^\w]', '_', result)
