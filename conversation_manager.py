@@ -73,17 +73,16 @@ class ConversationManager:
             user_input = self.user_act()
             if self.stop_str != user_input:
                 assistant_response = self.assistant_act()
-                found_actions = actions.find_actions(assistant_response)
-                while found_actions:
-                    self._gather_observation(found_actions)
+                action, action_input = actions.find_actions(assistant_response)
+                while action:
+                    self._gather_observation(action, action_input)
                     assistant_response = self.assistant_act()
-                    found_actions = actions.find_actions(assistant_response)
+                    action, action_input = actions.find_actions(assistant_response)
                 self._autosave()
             else:
                 return
 
-    def _gather_observation(self, found_actions):
-        action, action_input = found_actions
+    def _gather_observation(self, action, action_input):
         self._print_system_message(f"--running {action} {action_input}")
         observation = actions.run_action(action, action_input)
         next_prompt = f"OBSERVATION: {observation}"

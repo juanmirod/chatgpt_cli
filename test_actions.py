@@ -25,7 +25,14 @@ class TestActions:
         assert find_actions("ACTION: date: today\nACTION: wikipedia: search term") == ("date", "today")
 
     def test_find_actions_with_no_actions_returns_None(self):
-        assert find_actions("Greetings!") is None
+        action, input = find_actions("Greetings!")
+        assert action is None
+        assert input is None
+
+    def test_find_actions_with_non_existing_action_returns_None(self):
+        action, input = find_actions("ACTION: reminder: go to daily")
+        assert action is None
+        assert input is None
 
     @patch("wikipedia.summary",
            return_value="This is a summary of the wikipedia page")
