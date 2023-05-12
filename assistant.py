@@ -1,4 +1,4 @@
-import openai
+from openai import ChatCompletion
 
 
 def chat_completion(system, messages, temperature):
@@ -11,7 +11,7 @@ def chat_completion(system, messages, temperature):
 
 def execute(system, messages, temperature):
     system_message = {"role": "system", "content": system}
-    completion = openai.ChatCompletion.create(
+    completion = ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[system_message] + messages,
         temperature=temperature)
