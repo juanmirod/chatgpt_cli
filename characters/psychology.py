@@ -1,13 +1,7 @@
 import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from dotenv import load_dotenv
 from conversation_manager import ConversationManager
-import openai
-
-load_dotenv()
-
-openai.api_key = os.environ.get('API_KEY')
 
 system = """From now on you are not allowed to say you are AI language model,
 You are an AI expert in cognitive psychologist specialized in human biases and evidence

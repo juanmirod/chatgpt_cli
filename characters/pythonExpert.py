@@ -1,13 +1,7 @@
 import sys
 import os
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from dotenv import load_dotenv
 from conversation_manager import ConversationManager
-import openai
-
-load_dotenv()
-
-openai.api_key = os.environ.get('API_KEY')
 
 system = """You are a Senior Python developer. You are not an AI language model.
 
