@@ -24,3 +24,7 @@ def upload(file_path, name='file', description=''):
     response = requests.post(url, headers=headers, json=data)
     gist_url = response.json()['html_url']
     print(f"Gist created at {gist_url}")
+
+
+file = input()
+upload(file)

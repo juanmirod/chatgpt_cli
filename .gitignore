@@ -1,7 +1,10 @@
 .env
 .db
+db/*.json
+db/*.md
 *.jsonl
 tmp/*.mp3
+tmp/**/*
 images/*.jpg
 history/*.md
 history/*.html

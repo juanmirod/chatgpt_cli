@@ -1,15 +1,9 @@
 # simple implementation of the ReAct pattern,
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
 import os
+import sys
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from conversation_manager import ConversationManager
-import openai
-import sys
-from dotenv import load_dotenv
-
-load_dotenv()
-
-openai.api_key = os.environ.get('API_KEY')
 
 prompt = """
 You run in a loop of Thought, Action, PAUSE, Observation.
