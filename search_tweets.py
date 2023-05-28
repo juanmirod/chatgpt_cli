@@ -10,7 +10,7 @@ load_dotenv()
 openai.api_key = os.environ.get('API_KEY')
 
 # Load the embeddings from the file
-with open("tweets_db.json", "r") as f:
+with open("tmp/tweets_db.json", "r") as f:
     embeddings = json.load(f)
 
 # Build the Annoy index

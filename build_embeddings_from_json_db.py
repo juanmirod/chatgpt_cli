@@ -20,29 +20,28 @@ def get_embedding(text):
     )
 
 
-with open('tmp/tweets.json', 'r') as f:
+with open('db/memory_db.json', 'r') as f:
     data = json.load(f)
 
-with open("tweets_db_rows.md", "w") as f:
+with open("db/tmp_db_rows.md", "w") as f:
     json.dump('', f)
 
 embeddings = []
-tweets = data
+entries = data
 tokens = 0
-for tweetData in tweets:
-    text = tweetData['tweet']['full_text']
+for text in entries:
     print('Calculating embedding for:', text)
     response = get_embedding(text)
     tokens += response['usage']['total_tokens']
     new_embedding = {"text": text, "embedding": response["data"][0]["embedding"]}
     embeddings.append(new_embedding)
     # Write the embeddings to a file every time just in case something fails
-    with open("tweets_db_rows.md", "a") as f:
+    with open("db/tmp_db_rows.md", "a") as f:
         f.write(json.dumps(new_embedding) + '\n')
 
-with open("tweets_db.json", "w") as f:
+with open("db/embeddings_db.json", "w") as f:
     json.dump(embeddings, f)
 
 print('Embeddings calculated successfully!')
-print('Total tweets processed:', len(tweets))
+print('Number of entries processed:', len(entries))
 print('Total tokens used:', tokens)

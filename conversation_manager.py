@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 from tts import say
 import actions
 import assistant
+from long_term_memory import LongTermMemory
 
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "cyan"
@@ -33,6 +34,7 @@ class ConversationManager:
     width: int = 100
     # The character used to terminate text generation
     termination_character: str = '*'
+    use_long_term_memory: bool = False
 
     def __post_init__(self):
         self.termination_re = None
@@ -40,6 +42,9 @@ class ConversationManager:
             self.termination_re = re.compile(
                 f'.*\\{self.termination_character}$')
         self.console = Console(width=self.width, record=True)
+        if self.use_long_term_memory:
+            self._memory = LongTermMemory()
+            self._memory.load()
 
     def __call__(self):
         # if self.conversation:
@@ -148,6 +153,11 @@ class ConversationManager:
                     user_input += input()
                 # remove the termination character
                 user_input = user_input[:-1]
+            # add context from long term memory
+            if self.use_long_term_memory and (self.stop_str != user_input):
+                context = self._memory.recover_memories_about(user_input)
+                self._print_system_message(f"Recovered context:\n {context} \n")
+                user_input += f"---context\n {context} \n---"
             self.messages.append({"role": "user", "content": user_input})
         except (KeyboardInterrupt, EOFError):
             self._print_system_message('\nUser interrupted the conversation.')

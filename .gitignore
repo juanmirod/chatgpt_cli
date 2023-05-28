@@ -1,5 +1,7 @@
 .env
 .db
+db/*.json
+db/*.md
 *.jsonl
 tmp/*.mp3
 tmp/**/*
