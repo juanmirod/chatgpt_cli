@@ -27,5 +27,5 @@ def memorize(text):
         input=text
     )
     new_embedding = {"text": text, "embedding": response["data"][0]["embedding"]}
-    with open("memories/db", "a") as f:
+    with open("db/tmp_db_rows.md", "a") as f:
         f.write(json.dumps(new_embedding) + '\n')

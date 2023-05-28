@@ -33,7 +33,7 @@ docker run --rm -it jarvis
 To create a virtual environment for the project, run the following command:
 
 ```
-python3 -m venv local
+  python3 -m venv local
 ```
 
 This will create a virtual environment called `local` in your project directory.

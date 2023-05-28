@@ -45,5 +45,5 @@ def test_memorize_calculates_embeddings_and_stores_them_in_a_file():
                 engine="text-embedding-ada-002",
                 input="This is a test",
             )
-            mocked_file.assert_called_with("memories/db", "a")
+            mocked_file.assert_called_with("db/tmp_db_rows.md", "a")
             mocked_file().write.assert_called_with('{"text": "This is a test", "embedding": [1, 2, 3]}\n')
