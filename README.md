@@ -96,6 +96,7 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python3 characters/termu
 
 ## Possible next features, cool things that I would like...
 
+- [ ] Using API functions instead of prompt actions
 - [ ] Load a history file to continue a conversation
 - [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [ ] Multi-agent generation with several specialized agents

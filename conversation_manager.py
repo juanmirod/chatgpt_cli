@@ -28,8 +28,10 @@ class ConversationManager:
     messages: List[dict] = field(default_factory=list)
     # The total number of tokens used during the conversation
     token_total: int = 0
-    # The temperature to use during text generation
+    # The temperature to use during text generation (0.0 - 1.0) use 0.0 for more deterministic results
     temperature: float = 0.5
+    # The model to use during text generation
+    model: str = "gpt-3.5-turbo"
     # The width of the text output
     width: int = 100
     # The character used to terminate text generation
@@ -114,7 +116,8 @@ class ConversationManager:
         (result, tokens) = assistant.chat_completion(
             'You are a helpful AI assistant.',
             self.messages,
-            self.temperature
+            self.temperature,
+            self.model
         )
         self.token_total += tokens
         return re.sub(r'[^\w]', '_', result)
@@ -166,7 +169,7 @@ class ConversationManager:
 
     def assistant_act(self):
         self._print_system_message(f"waiting for response...")
-        (result, tokens) = assistant.chat_completion(self.system, self.messages, self.temperature)
+        (result, tokens) = assistant.chat_completion(self.system, self.messages, self.temperature, self.model)
         self.token_total += tokens
         self.console.print(
             f"{self.character}:" if self.character else "",

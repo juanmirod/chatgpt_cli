@@ -2,7 +2,7 @@ import json
 from openai import ChatCompletion, Embedding
 
 
-def chat_completion(system, messages, temperature):
+def chat_completion(system, messages, temperature, model="gpt-3.5-turbo"):
     try:
         result = execute(system, messages, temperature)
     except Exception as e:
@@ -10,10 +10,10 @@ def chat_completion(system, messages, temperature):
     return result
 
 
-def execute(system, messages, temperature):
+def execute(system, messages, temperature, model="gpt-3.5-turbo"):
     system_message = {"role": "system", "content": system}
     completion = ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model=model,
         messages=[system_message] + messages,
         temperature=temperature)
     token_total = completion["usage"]["total_tokens"]
