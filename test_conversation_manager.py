@@ -47,7 +47,7 @@ class TestConversationManager:
             assert mocked_file.call_count == 2
 
             mocked_file.assert_called_with(
-                f"history/Hi_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w")
+                f"history/{datetime.now().strftime('%Y%m%d_%H%M%S')}_Hi.md", "w")
             mocked_file().write.assert_has_calls([
                 call('**You:** Hello!\n\n**ChatGPT:** Greetings!'),
                 call('**You:** Hello!\n\n**ChatGPT:** Greetings!\n\n**You:** q')
@@ -85,7 +85,7 @@ class TestConversationManagerWithActions:
             assert mock_input.call_count == 2
             assert mocked_file.call_count == 2
             mocked_file.assert_called_with(
-                f"history/Hi_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md", "w")
+                f"history/{datetime.now().strftime('%Y%m%d_%H%M%S')}_Hi.md", "w")
             mocked_file().write.assert_has_calls([
                 call('**You:** Who is Barak Obama?\n\n**ChatGPT:** ACTION: wikipedia: Barak Obama\n\n'
                      '**You:** OBSERVATION: Barak Obama is the 44th president of the United States.\n\n'

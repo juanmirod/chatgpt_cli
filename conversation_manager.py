@@ -29,14 +29,17 @@ class ConversationManager:
     # The total number of tokens used during the conversation
     token_total: int = 0
     # The temperature to use during text generation (0.0 - 1.0) use 0.0 for more deterministic results
-    temperature: float = 0.5
+    temperature: float = 0.2
     # The model to use during text generation
     model: str = "gpt-3.5-turbo"
     # The width of the text output
     width: int = 100
     # The character used to terminate text generation
     termination_character: str = '*'
+    # If true, the manager will try to load and recover related texts using the long term memory class
     use_long_term_memory: bool = False
+    # Adds an array of function definitions that the assistant can use to return an action instead of an answer
+    functions = None
 
     def __post_init__(self):
         self.termination_re = None
@@ -134,7 +137,7 @@ class ConversationManager:
 
     def _save_chat_history(self):
         summary = self._get_conversation_title()
-        path = f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+        path = f"history/{datetime.now().strftime('%Y%m%d_%H%M%S')}_{summary}.md"
         with open(path, "w") as file:
             file.write(self._messages_to_text())
 
@@ -169,7 +172,13 @@ class ConversationManager:
 
     def assistant_act(self):
         self._print_system_message(f"waiting for response...")
-        (result, tokens) = assistant.chat_completion(self.system, self.messages, self.temperature, self.model)
+        (result, tokens) = assistant.chat_completion(
+            self.system,
+            self.messages,
+            self.temperature,
+            self.model,
+            self.functions
+        )
         self.token_total += tokens
         self.console.print(
             f"{self.character}:" if self.character else "",
