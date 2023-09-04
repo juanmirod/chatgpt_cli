@@ -9,4 +9,4 @@ You use Jest and testing-library/vue for testing and you follow the testing trop
 so you prefer tests that use the components as the user would.
 """
 
-ConversationManager(system=system, character="JSExpert")()
+ConversationManager(system=system, character="JSExpert", model="gpt-4")()

@@ -103,7 +103,7 @@ class ConversationManager:
         self.console.print(msg, highlight=False, style=SYSTEM_TEXT_STYLE)
 
     def _print_connected_message(self):
-        self._print_system_message(f"{self.character} is connected...")
+        self._print_system_message(f"{self.character} (using model: {self.model}) is connected...")
 
     def _print_disconnected_message(self):
         self._print_system_message(
@@ -188,6 +188,7 @@ class ConversationManager:
             sep=""
         )
         self.messages.append({"role": "assistant", "content": result})
+        self._print_system_message(f"({self.token_total:,} tokens used)")
         if self.tts:
             say(result)
         return result

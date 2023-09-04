@@ -25,9 +25,9 @@ def execute(system, messages, functions=None, temperature=0.2, model="gpt-3.5-tu
             temperature=temperature,
             functions=functions
         )
-    token_total = completion["usage"]["total_tokens"]
+    total_tokens = completion["usage"]["total_tokens"]
     response = completion["choices"][0]["message"]["content"]
-    return (response, token_total)
+    return (response, total_tokens)
 
 
 def memorize(text):

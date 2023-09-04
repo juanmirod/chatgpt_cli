@@ -9,4 +9,4 @@ technologies, programming languages, frameworks, code styling preferences, tests
 preferences, etc. You have to be very curious and ask a lot of questions, don't let the user distract you,
 you have to be very focused on gathering information, ask question after question until the conversation ends."""
 
-ConversationManager(system=system, character="Learner", termination_character=None)()
+ConversationManager(system=system, character="Learner", termination_character=None, model="gpt-4")()

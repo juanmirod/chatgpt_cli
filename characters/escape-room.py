@@ -15,4 +15,5 @@ After that the user will talk with you instead of me.
 ConversationManager(
     system=system,
     character="Narrator",
-    termination_character=None)()
+    termination_character=None,
+    model="gpt-4")()
