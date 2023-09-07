@@ -27,12 +27,16 @@ class ConversationManager:
     messages: List[dict] = field(default_factory=list)
     # The total number of tokens used during the conversation
     token_total: int = 0
-    # The temperature to use during text generation
-    temperature: float = 0.5
+    # The temperature to use during text generation (0.0 - 1.0) use 0.0 for more deterministic results
+    temperature: float = 0.2
+    # The model to use during text generation
+    model: str = "gpt-3.5-turbo"
     # The width of the text output
     width: int = 100
     # The character used to terminate text generation
     termination_character: str = '*'
+    # Adds an array of function definitions that the assistant can use to return an action instead of an answer
+    functions = None
 
     def __post_init__(self):
         self.termination_re = None
@@ -93,7 +97,7 @@ class ConversationManager:
         self.console.print(msg, highlight=False, style=SYSTEM_TEXT_STYLE)
 
     def _print_connected_message(self):
-        self._print_system_message(f"{self.character} is connected...")
+        self._print_system_message(f"{self.character} (using model: {self.model}) is connected...")
 
     def _print_disconnected_message(self):
         self._print_system_message(
@@ -109,7 +113,8 @@ class ConversationManager:
         (result, tokens) = assistant.chat_completion(
             'You are a helpful AI assistant.',
             self.messages,
-            self.temperature
+            self.temperature,
+            self.model
         )
         self.token_total += tokens
         return re.sub(r'[^\w]', '_', result)
@@ -126,7 +131,7 @@ class ConversationManager:
 
     def _save_chat_history(self):
         summary = self._get_conversation_title()
-        path = f"history/{summary}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+        path = f"history/{datetime.now().strftime('%Y%m%d_%H%M%S')}_{summary}.md"
         with open(path, "w") as file:
             file.write(self._messages_to_text())
 
@@ -156,7 +161,13 @@ class ConversationManager:
 
     def assistant_act(self):
         self._print_system_message(f"waiting for response...")
-        (result, tokens) = assistant.chat_completion(self.system, self.messages, self.temperature)
+        (result, tokens) = assistant.chat_completion(
+            self.system,
+            self.messages,
+            self.temperature,
+            self.model,
+            self.functions
+        )
         self.token_total += tokens
         self.console.print(
             f"{self.character}:" if self.character else "",
@@ -166,6 +177,7 @@ class ConversationManager:
             sep=""
         )
         self.messages.append({"role": "assistant", "content": result})
+        self._print_system_message(f"({self.token_total:,} tokens used)")
         if self.tts:
             say(result)
         return result
