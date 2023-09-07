@@ -13,4 +13,4 @@ def say(txt):
     music.play()
 
     sleep(music.duration)  # prevent from killing
-    os.remove(filename)  # remove temperory file
+    os.remove(filename)  # remove temporary file

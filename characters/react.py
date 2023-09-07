@@ -1,4 +1,4 @@
-# Simple implementation of the ReAct pattern, works wuite well with gpt-4
+# Simple implementation of the ReAct pattern, works quite well with gpt-4
 # this implementation is previous to the functions API, in fact, before
 # OpenAI released the plugins, gpt-3.5-turbo gets a bit confused with the
 # observations or it is a bit stubborn and refuses to believe the observation
