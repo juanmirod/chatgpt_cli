@@ -122,7 +122,6 @@ class ConversationManager:
             self.temperature,
             self.model
         )
-        self.token_total += tokens
         return re.sub(r'[^\w]', '_', result)
 
     def _autosave(self):
@@ -188,7 +187,8 @@ class ConversationManager:
             sep=""
         )
         self.messages.append({"role": "assistant", "content": result})
-        self._print_system_message(f"({self.token_total:,} tokens used)")
+        self._print_system_message(f"({tokens:,} tokens in this conversation)")
+        self._print_system_message(f"({self.token_total:,} total tokens used)")
         if self.tts:
             say(result)
         return result
