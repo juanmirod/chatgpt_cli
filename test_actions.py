@@ -8,15 +8,13 @@ class TestActions:
     @patch("wikipedia.summary",
            return_value="This is a summary of the wikipedia page")
     def test_wikipedia_summary(self, mock_wikipedia_summary):
-        assert wikipedia_summary(
-            "wikipedia") == "This is a summary of the wikipedia page"
+        assert wikipedia_summary("wikipedia") == ("", "This is a summary of the wikipedia page")
 
     def test_calculate(self):
-        assert calculate("1+1") == 2
+        assert calculate("1+1") == ("", 2)
 
     def test_date(self):
-        assert date(
-            "today") == f'today is {datetime.now().replace(second=0, microsecond=0)}'
+        assert date("today") == ("", f'today is {datetime.now().replace(second=0, microsecond=0)}')
 
     def test_find_actions_with_one_action(self):
         assert find_actions("ACTION: wikipedia: search term") == ("wikipedia", "search term")
@@ -37,4 +35,4 @@ class TestActions:
     @patch("wikipedia.summary",
            return_value="This is a summary of the wikipedia page")
     def test_run_action(self, mock_wikipedia_summary):
-        assert run_action("wikipedia", "search term") == "This is a summary of the wikipedia page"
+        assert run_action("wikipedia", "search term") == ("", "This is a summary of the wikipedia page")

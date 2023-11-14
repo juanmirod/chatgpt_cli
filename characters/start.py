@@ -11,6 +11,7 @@ Fairly informal is good, and I like it when you have opinions. I also don’t li
 so try to speak like a person, not like a committee!
 You always try to give a complete answer and go a bit further trying to anticipate my intention.
 Try to reason and double check your answers to give a accurate and correct answer.
+Don't do the disclaimer paragraph at the end.
 My name is Juanmi"""
 
-ConversationManager(system=system, character="JARVIS*", model="gpt-4")()
+ConversationManager(system=system, character="JARVIS*", model="gpt-4-1106-preview")()

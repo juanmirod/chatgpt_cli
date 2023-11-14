@@ -69,7 +69,7 @@ class TestConversationManagerWithActions:
         ("I checked and Barak Obama is the 44th president of the United States.", 100),
     ])
     @patch.object(ConversationManager, "_get_conversation_title", return_value="Hi")
-    @patch("actions.run_action", return_value="Barak Obama is the 44th president of the United States.")
+    @patch("actions.run_action", return_value=("", "Barak Obama is the 44th president of the United States."))
     def test_full_conversation_with_actions(
             self,
             mock_run_action,

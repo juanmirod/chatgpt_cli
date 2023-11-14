@@ -1,5 +1,6 @@
 aiohttp==3.8.4
 aiosignal==1.3.1
+annotated-types==0.6.0
 annoy==1.17.2
 anyio==3.6.2
 async-timeout==4.0.2
@@ -13,6 +14,7 @@ click==8.1.3
 colorama==0.4.6
 contourpy==1.0.7
 cycler==0.11.0
+distro==1.8.0
 docopt==0.6.2
 exceptiongroup==1.1.1
 fonttools==4.39.3
@@ -20,6 +22,7 @@ frozenlist==1.3.3
 gTTS==2.3.1
 h11==0.14.0
 httpcore==0.16.3
+httpx==0.24.1
 idna==3.4
 iniconfig==2.0.0
 kiwisolver==1.4.4
@@ -28,7 +31,7 @@ matplotlib==3.7.1
 mdurl==0.1.2
 multidict==6.0.4
 numpy==1.24.3
-openai==0.27.1
+openai==1.1.0
 packaging==21.3
 pandas==2.0.1
 Pillow==9.5.0
@@ -38,6 +41,8 @@ plotly==5.14.1
 pluggy==1.0.0
 pycodestyle==2.10.0
 pycparser==2.21
+pydantic==2.4.2
+pydantic_core==2.10.1
 pyglet==2.0.5
 Pygments==2.14.0
 pyparsing==3.0.9
@@ -56,6 +61,7 @@ soupsieve==2.4.1
 tenacity==8.2.2
 tomli==2.0.1
 tqdm==4.65.0
+typing_extensions==4.8.0
 tzdata==2023.3
 urllib3==1.26.14
 watchdog==3.0.0

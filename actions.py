@@ -17,7 +17,7 @@ def wikipedia_summary(q):
             # if there are several pages for that string, pick the first
             # suggestion
             text = wikipedia.summary(e.options[0], sentences=5)
-    return text
+    return ("", text)
 
 
 def calculate(exp):
@@ -25,11 +25,11 @@ def calculate(exp):
     TODO: use a safer way to evaluate the expression or at least ask the user if they
     really want to run the expression
     """
-    return eval(exp)
+    return ("", eval(exp))
 
 
 def date(when):
-    return f'today is {datetime.now().replace(second=0, microsecond=0)}'
+    return ("", f'today is {datetime.now().replace(second=0, microsecond=0)}')
 
 
 def find_actions(text):

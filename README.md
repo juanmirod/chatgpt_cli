@@ -89,15 +89,16 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python3 characters/termu
 - [x] Add an action to generate images with the help of ChatGPT using Dall-e API
 - [x] Long term memory with a vector database
 - [x] Publish a conversation as a gist or somewhere else
+- [x] Add a system message with the number of tokens ~left before reaching the limit~ in this conversation 
   
 ## I'm working on...
 
-- [ ] Add a system message with the number of tokens left before reaching the limit 
+- [ ] Update OpenAI sdk and gpt4-turbo
 
 ## Possible next features, cool things that I would like...
 
-- [ ] Using API functions instead of prompt actions
 - [ ] Load a history file to continue a conversation
+- [ ] Using API functions instead of prompt actions
 - [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [ ] Multi-agent generation with several specialized agents
 

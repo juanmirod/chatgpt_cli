@@ -94,8 +94,9 @@ class ConversationManager:
 
     def _gather_observation(self, action, action_input):
         self._print_system_message(f"--running {action} {action_input}")
-        observation = actions.run_action(action, action_input)
+        (prompt, observation) = actions.run_action(action, action_input)
         next_prompt = f"OBSERVATION: {observation}"
+        self._print_system_message(f"Revised prompt: {prompt}")
         self._print_system_message(next_prompt)
         self.messages.append({"role": "user", "content": next_prompt})
 

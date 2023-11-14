@@ -50,5 +50,5 @@ you: The capital of France is Paris
 """.strip()
 
 
-bot = ConversationManager(system=prompt, character="JARVIS*", model="gpt-4")
+bot = ConversationManager(system=prompt, character="REACT*", model="gpt-4-1106-preview")
 bot.start_chat_with_actions()
