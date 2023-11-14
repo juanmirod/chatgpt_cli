@@ -1,11 +1,13 @@
-import json
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
 client = OpenAI()
 
-def chat_completion(system, messages, temperature, model="gpt-3.5-turbo", functions=None):
+
+def chat_completion(system, messages, temperature, model="gpt-3.5-turbo",
+                    functions=None
+                    ):
     try:
         result = execute(system, messages, functions, temperature, model)
     except Exception as e:

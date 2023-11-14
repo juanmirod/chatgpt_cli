@@ -22,8 +22,8 @@ def wikipedia_summary(q):
 
 def calculate(exp):
     """
-    TODO: use a safer way to evaluate the expression or at least ask the user if they
-    really want to run the expression
+    TODO: use a safer way to evaluate the expression or at least ask the user
+    if they really want to run the expression
     """
     return ("", eval(exp))
 
@@ -36,7 +36,8 @@ def find_actions(text):
     """
     Returns a list of known actions found in the given text
     """
-    actions = [action_re.match(a) for a in text.split('\n') if action_re.match(a)]
+    actions = [action_re.match(a)
+               for a in text.split('\n') if action_re.match(a)]
     (action, input) = actions[0].groups() if actions else (None, None)
     return (action, input) if action in known_actions else (None, None)
 
