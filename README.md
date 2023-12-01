@@ -73,7 +73,7 @@ To create a new character, copy any of the characters files and modify the syste
 I also have an alias in my laptop and another one in termux to run the prompt with one simple command:
 
 ```
-alias jarvis='cd ~/jarvis && source local/bin/activate; python chatgpt_cli.characters.start'
+alias jarvis='cd ~/jarvis && source local/bin/activate; python -m chatgpt_cli.characters.start'
 ```
 
 ## Features
@@ -91,15 +91,15 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python chatgpt_cli.chara
 - [x] Publish a conversation as a gist or somewhere else
 - [x] Add a system message with the number of tokens ~left before reaching the limit~ in this conversation 
 - [x] Updated image generator to use DALLE3
+- [x] Updated OpenAI sdk and gpt4-turbo
   
 ## I'm working on...
 
-- [ ] Update OpenAI sdk and gpt4-turbo
+- [ ] Add the TTS from OpenAI besides Google so the user can chose which one to use in the conversation config
 
 ## Possible next features, cool things that I would like...
 
 - [ ] Stand-alone dalle3 interface that works more like ChatGPT
-- [ ] Add the TTS from OpenAI besides Google so the user can chose which one to use in the conversation config
 - [ ] Add a web interface and an API to interact with the conversation manager or the agent directly 
 - [ ] Load a history file to continue a conversation
 - [ ] Using API functions instead of prompt actions
