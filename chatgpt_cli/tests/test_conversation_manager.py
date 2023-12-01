@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch, mock_open, call
-from conversation_manager import ConversationManager
 from datetime import datetime
+from chatgpt_cli.conversation_manager import ConversationManager
 
 
 class TestConversationManager:
@@ -22,7 +22,7 @@ class TestConversationManager:
         assert chat.messages[0]["content"] == "Hello!"
         mock_input.assert_called_once()
 
-    @patch("assistant.chat_completion", return_value=("Hi there!", 100))
+    @patch("chatgpt_cli.assistant.chat_completion", return_value=("Hi there!", 100))
     def test_assistant_act(self, mock_chat_completion, chat):
         result = chat.assistant_act()
         mock_chat_completion.assert_called_once()
@@ -32,7 +32,7 @@ class TestConversationManager:
         assert chat.messages[0]["content"] == "Hi there!"
 
     @patch("builtins.input", side_effect=["Hello!", "q"])
-    @patch("assistant.chat_completion", return_value=("Greetings!", 100))
+    @patch("chatgpt_cli.assistant.chat_completion", return_value=("Greetings!", 100))
     @patch.object(ConversationManager, "_get_conversation_title", return_value="Hi")
     def test_full_conversation(
             self,
@@ -64,12 +64,12 @@ class TestConversationManagerWithActions:
             termination_character=None)
 
     @patch("builtins.input", side_effect=["Who is Barak Obama?", "q"])
-    @patch("assistant.chat_completion", side_effect=[
+    @patch("chatgpt_cli.assistant.chat_completion", side_effect=[
         ("ACTION: wikipedia: Barak Obama", 100),
         ("I checked and Barak Obama is the 44th president of the United States.", 100),
     ])
     @patch.object(ConversationManager, "_get_conversation_title", return_value="Hi")
-    @patch("actions.run_action", return_value=("", "Barak Obama is the 44th president of the United States."))
+    @patch("chatgpt_cli.actions.run_action", return_value=("", "Barak Obama is the 44th president of the United States."))
     def test_full_conversation_with_actions(
             self,
             mock_run_action,

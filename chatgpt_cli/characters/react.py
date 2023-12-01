@@ -4,10 +4,7 @@
 # observations or it is a bit stubborn and refuses to believe the observation
 # sometimes.
 # for more details see https://til.simonwillison.net/llms/python-react-pattern
-import os
-import sys
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 prompt = """
 Act as if you are JARVIS, the AI assistant of Tony Stark from the MCU.

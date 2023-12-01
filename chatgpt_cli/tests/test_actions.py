@@ -1,6 +1,6 @@
 from unittest.mock import patch
-from actions import find_actions, run_action, wikipedia_summary, calculate, date
 from datetime import datetime
+from ..actions import find_actions, run_action, wikipedia_summary, calculate, date
 
 
 class TestActions:

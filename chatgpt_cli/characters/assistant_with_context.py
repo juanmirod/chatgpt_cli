@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """You are a helpful IA assistant, you will get
 some context information with each question, the context

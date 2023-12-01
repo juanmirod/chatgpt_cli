@@ -2,7 +2,7 @@ import wikipedia
 import warnings
 import re
 from datetime import datetime
-from imagine import imagine
+from .imagine import imagine
 
 wikipedia.set_lang("en")
 action_re = re.compile('^ACTION: (\\w+): (.*)$')

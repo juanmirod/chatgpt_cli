@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """Act as a university teacher and mentor that helps the user to learn new topics.
 You MUST provide insight and provoke curiosity and further inquiry from the user on every request.

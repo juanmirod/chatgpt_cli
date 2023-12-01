@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """Act as the narrator of a escape room, first you have to set the scene and then the user will
 ask questions to try to solve the puzzles and escape the room. But before starting the game please write

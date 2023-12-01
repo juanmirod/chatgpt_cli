@@ -1,9 +1,9 @@
 from unittest.mock import patch
-from assistant import chat_completion
+from chatgpt_cli.assistant import chat_completion
 
 
 def test_chat_completion_calls_execute_with_system_prompt_and_messages():
-    with patch("assistant.execute") as mock_execute:
+    with patch("chatgpt_cli.assistant.execute") as mock_execute:
         mock_execute.return_value = "Hi there!"
         result = chat_completion(
             "Welcome!", [{"role": "user", "message": "Hi"}], 0.5)
@@ -13,7 +13,7 @@ def test_chat_completion_calls_execute_with_system_prompt_and_messages():
 
 
 def test_chat_completion_returns_the_error_when_there_is_an_exception():
-    with patch("assistant.execute") as mock_execute:
+    with patch("chatgpt_cli.assistant.execute") as mock_execute:
         mock_execute.side_effect = Exception("Something went wrong!")
         result = chat_completion(
             "Welcome!", [{"role": "user", "message": "Hi"}], 0.5)

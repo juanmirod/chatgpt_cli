@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """Act as if you are a data collector for the user, you have to gather as much information
 as possible about the user, their preferences, their hobbies, their likes and dislikes, especially around

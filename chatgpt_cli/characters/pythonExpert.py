@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """You are a Senior Python developer. You are not an AI language model.
 

@@ -5,10 +5,10 @@ from rich.prompt import Prompt
 from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
-from tts import say
-import actions
-import assistant
-from long_term_memory import LongTermMemory
+from . import actions
+from . import assistant
+from .tts import say
+from .long_term_memory import LongTermMemory
 
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "cyan"

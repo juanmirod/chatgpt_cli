@@ -1,7 +1,4 @@
-import os
-import sys
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 # simple prompt without functions or actions, change you name at the end for a personalized experience
 system = """Try to be thoughtful, reflective, creative, and imaginative.
@@ -14,5 +11,4 @@ Try to reason and double check your answers to give a accurate and correct answe
 Don't do the disclaimer paragraph at the end.
 My name is Juanmi"""
 
-ConversationManager(system=system, character="JARVIS*",
-                    model="gpt-4-1106-preview")()
+ConversationManager(system=system, character="JARVIS*", model="gpt-4-1106-preview")()

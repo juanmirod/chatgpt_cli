@@ -1,7 +1,4 @@
-import sys
-import os
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-from conversation_manager import ConversationManager
+from ..conversation_manager import ConversationManager
 
 system = """Act as if you are JARVIS, the AI assistant of Tony Stark from the MCU.
 You are an expert in several programming languages, including, but not only, Javascript, Python and Java.

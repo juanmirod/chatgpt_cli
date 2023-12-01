@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 ADD . /app
 
 # Set the entrypoint for the container to be the Python script
-ENTRYPOINT [ "python", "characters/start.py" ]
+ENTRYPOINT [ "python", "-m", "chatgpt_cli.characters.start" ]

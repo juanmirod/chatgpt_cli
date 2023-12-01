@@ -59,13 +59,13 @@ Before running the chat, you need to set the `API_KEY` environment variable to y
 To start the chat, run the following command:
 
 ```
-python3 characters/start.py
+python -m chatgpt_cli.characters.start
 ```
 
 There are several sample personalities provided in the repo, which can be run simply by specifying the name of the file:
 
 ```
-python3 characters/psycologist.py
+python -m chatgpt_cli.characters.psycologist
 ```
 
 To create a new character, copy any of the characters files and modify the system prompt as you like, you can try some prompts from here: https://prompts.chat
@@ -73,7 +73,7 @@ To create a new character, copy any of the characters files and modify the syste
 I also have an alias in my laptop and another one in termux to run the prompt with one simple command:
 
 ```
-alias jarvis='cd ~/jarvis && source local/bin/activate; python3 characters/termux.py'
+alias jarvis='cd ~/jarvis && source local/bin/activate; python chatgpt_cli.characters.start'
 ```
 
 ## Features
