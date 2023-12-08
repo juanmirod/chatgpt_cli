@@ -1,7 +1,7 @@
 from unittest.mock import patch
 from datetime import datetime
-from ..actions import find_actions, run_action, wikipedia_summary, calculate, date
-
+with patch("openai.OpenAI"):
+    from ..actions import find_actions, run_action, wikipedia_summary, calculate, date
 
 class TestActions:
 

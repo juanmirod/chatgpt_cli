@@ -1,5 +1,6 @@
 from unittest.mock import patch
-from chatgpt_cli.assistant import chat_completion
+with patch("openai.OpenAI"):
+    from chatgpt_cli.assistant import chat_completion
 
 
 def test_chat_completion_calls_execute_with_system_prompt_and_messages():

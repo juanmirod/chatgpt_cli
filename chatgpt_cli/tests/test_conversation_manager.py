@@ -1,7 +1,8 @@
 import pytest
 from unittest.mock import patch, mock_open, call
 from datetime import datetime
-from chatgpt_cli.conversation_manager import ConversationManager
+with patch("openai.OpenAI"):
+    from chatgpt_cli.conversation_manager import ConversationManager
 
 
 class TestConversationManager:
