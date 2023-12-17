@@ -14,6 +14,18 @@ class TestConversationManager:
             messages=[],
             termination_character=None)
 
+    def test_takes_the_model_from_the_environment_by_default(self, chat):
+        assert chat.model == "gpt-6"
+
+    def test_takes_the_model_from_the_constructor(self):
+        chat = ConversationManager(
+            system="Welcome!",
+            character="ChatGPT",
+            messages=[],
+            termination_character=None,
+            model="gpt-4")
+        assert chat.model == "gpt-4"
+
     @patch("builtins.input", return_value="Hello!")
     def test_user_act(self, mock_input, chat):
         user_input = chat.user_act()

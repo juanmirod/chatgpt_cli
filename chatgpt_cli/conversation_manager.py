@@ -5,11 +5,15 @@ from rich.prompt import Prompt
 from datetime import datetime
 from typing import List
 from dataclasses import dataclass, field
+from dotenv import load_dotenv
+from os import environ
+
 from . import actions
 from . import assistant
 from .tts import say
 from .long_term_memory import LongTermMemory
 
+load_dotenv()
 SYSTEM_TEXT_STYLE = "italic yellow"
 ASSISTANT_TEXT_STYLE = "cyan"
 
@@ -31,7 +35,7 @@ class ConversationManager:
     # The temperature to use during text generation (0.0 - 1.0) use 0.0 for more deterministic results
     temperature: float = 0.2
     # The model to use during text generation
-    model: str = "gpt-3.5-turbo"
+    model: str = environ.get("MODEL", "gpt-3.5-turbo")
     # The width of the text output
     width: int = 100
     # The character used to terminate text generation
