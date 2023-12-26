@@ -9,7 +9,7 @@ When the user writes `q` as request, the script finishes the conversation and st
 
 The chat now allow multiline entries for the user (needed when you copy and paste some code) do to send
 the request the user needs to finish with a `*` as termination character. The termination character can
-be configured when instantiating the ChatGPT class, if `None` is passed the user request will be send on return. 
+be configured when instantiating the ChatGPT class, if `None` is passed the user request will be send on return.
 
 It also includes a couple of example system prompts that define a "character" to follow for ChatGPT.
 
@@ -28,6 +28,7 @@ docker run --rm -it jarvis
 ```
 
 ## Run without docker, using virtual environment
+
 ### Setting up a Virtual Environment
 
 To create a virtual environment for the project, run the following command:
@@ -80,7 +81,7 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python -m chatgpt_cli.ch
 
 - [x] Save the conversation
 - [x] Ask for a summary in a few words to name the file of the saved conversation
-- [x] Error handling: the bot answers with the error message 
+- [x] Error handling: the bot answers with the error message
 - [x] Implement ReAct pattern for fact checking and arithmetic
 - [x] Copy and paste code in the request: It waits for a termination character so you can write several lines as part of your volley.
 - [x] Works on Termux! \o/ -> There is a Branch for termux with less dependencies
@@ -89,23 +90,24 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python -m chatgpt_cli.ch
 - [x] Add an action to generate images with the help of ChatGPT using Dall-e API
 - [x] Long term memory with a vector database
 - [x] Publish a conversation as a gist or somewhere else
-- [x] Add a system message with the number of tokens ~left before reaching the limit~ in this conversation 
+- [x] Add a system message with the number of tokens ~left before reaching the limit~ in this conversation
 - [x] Updated image generator to use DALLE3
 - [x] Updated OpenAI sdk and gpt4-turbo
-  
+
 ## I'm working on...
 
-- [ ] Add the TTS from OpenAI besides Google so the user can chose which one to use in the conversation config
+- [ ] Stand-alone tts interface to make audios for posts in the blog
 
 ## Possible next features, cool things that I would like...
 
 - [ ] Stand-alone dalle3 interface that works more like ChatGPT
-- [ ] Add a web interface and an API to interact with the conversation manager or the agent directly 
+- [ ] Add the TTS from OpenAI besides Google so the user can chose which one to use in the conversation config
+- [ ] Add a web interface and an API to interact with the conversation manager or the agent directly
 - [ ] Load a history file to continue a conversation
 - [ ] Using API functions instead of prompt actions
 - [ ] Summarize the conversation in a paragraph when it's getting to the token limit to be able to continue on track
 - [ ] Multi-agent generation with several specialized agents
-- [ ] Using local a local models instead of OpenAI API
+- [ ] Using local models instead of OpenAI API
 
 ## Runing the test suite
 
@@ -121,11 +123,9 @@ Running the tests in watch mode:
 ptw
 ```
 
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 
 ## License
 
@@ -135,4 +135,3 @@ This project is licensed under the [MIT](https://choosealicense.com/licenses/mit
 
 Based in the a sample project by Max Woolf ([@minimaxir](https://minimaxir.com))
 ChatGPT contributed to develop this repo.
-
