@@ -37,3 +37,23 @@ def parse_markdown(markdown):
     # Strip leading and trailing whitespace
     text = text.strip()
     return text
+
+
+def chunk_text(text, max_length):
+    paragraphs = text.split('\n')
+    chunks = []
+    current_chunk = ""
+
+    for paragraph in paragraphs:
+        if len(current_chunk) + len(paragraph) + 1 <= max_length:  # +1 for the newline
+            current_chunk += paragraph + '\n'
+        else:
+            # remove trailing '\n' from the chunk
+            chunks.append(current_chunk.rstrip('\n'))
+            current_chunk = paragraph + '\n'
+
+    # add the last chunk if it's not empty
+    if current_chunk:
+        chunks.append(current_chunk.rstrip('\n'))
+
+    return chunks

@@ -1,4 +1,4 @@
-from ..text_parser import parse_markdown
+from ..text_parser import parse_markdown, chunk_text
 
 sample_markdown = """
 ---
@@ -27,3 +27,12 @@ class TestTextParser:
         assert result == (
             "Some text here bold italic and some more text\n"
             "Some quote here")
+
+    def test_chunks_long_text_keeping_paragraphs(self):
+        text = "This is a long text\noh!\nAnother paragraph\nAnd another one"
+        result = chunk_text(text, max_length=25)
+        assert result == [
+            "This is a long text\noh!",
+            "Another paragraph",
+            "And another one"
+        ]
