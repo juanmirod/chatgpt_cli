@@ -17,6 +17,8 @@ layout: post
 Some text here **bold** *italic* and some more text
 
 > Some quote here
+
+[^1]: Footnote 1
 """
 
 
@@ -26,7 +28,8 @@ class TestTextParser:
         result = parse_markdown(sample_markdown)
         assert result == (
             "Some text here bold italic and some more text\n"
-            "Some quote here")
+            "Some quote here\n"
+            "Footnote 1")
 
     def test_chunks_long_text_keeping_paragraphs(self):
         text = "This is a long text\noh!\nAnother paragraph\nAnd another one"

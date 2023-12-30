@@ -11,6 +11,7 @@ def parse_markdown(markdown):
         r'\# *',               # Headers
         r'\- +',               # Horizontal rules and lists
         r'\> +',               # Blockquotes
+        r'\[\^\d\]: ',           # Footnotes
     ]
 
     text = markdown
