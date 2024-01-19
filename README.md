@@ -93,10 +93,9 @@ alias jarvis='cd ~/jarvis && source local/bin/activate; python -m chatgpt_cli.ch
 - [x] Add a system message with the number of tokens ~left before reaching the limit~ in this conversation
 - [x] Updated image generator to use DALLE3
 - [x] Updated OpenAI sdk and gpt4-turbo
+- [x] Stand-alone tts interface to make audios for posts in the blog
 
 ## I'm working on...
-
-- [ ] Stand-alone tts interface to make audios for posts in the blog
 
 ## Possible next features, cool things that I would like...
 

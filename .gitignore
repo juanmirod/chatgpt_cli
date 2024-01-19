@@ -6,6 +6,7 @@ db/*.md
 */tmp/*.mp3
 tmp/**/*
 images/*.jpg
+images/*.png
 history/*.md
 history/*.html
 .DS_Store
